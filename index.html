@@ -10,82 +10,39 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: #000;
             color: #fff;
             min-height: 100vh;
             padding: 40px 20px;
         }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            padding: 0 20px;
-        }
-
-        .school-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .school-logo,
-        .founder-photo {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-
-        .school-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffd700;
-            text-align: center;
-            max-width: 400px;
-        }
-
-        .computing-club-logo {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-
         .header {
             text-align: center;
             margin-bottom: 60px;
             position: relative;
         }
-
         .header h1 {
             font-size: 72px;
             color: #ffd700;
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
-
         .header p {
             font-size: 32px;
             color: #aaa;
         }
-
         .developers-section {
             position: absolute;
             top: 0;
             right: 0;
         }
-
         .developers-button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: 3px solid #667eea;
@@ -103,26 +60,23 @@
             height: 60px;
             overflow: hidden;
             white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
         }
-
         .developers-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.8);
             width: auto;
         }
-
         .developer-label {
             font-size: 18px;
             opacity: 0;
             transition: opacity 0.3s ease;
             max-width: 0;
         }
-
         .developers-button:hover .developer-label {
             opacity: 1;
             max-width: 200px;
         }
-
         .developers-dropdown {
             display: none;
             position: absolute;
@@ -136,26 +90,22 @@
             max-height: 500px;
             overflow-y: auto;
             z-index: 1000;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
         }
-
         .developers-dropdown.active {
             display: block;
             animation: slideDown 0.3s ease;
         }
-
         @keyframes slideDown {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
         .developer-item {
             display: flex;
             align-items: center;
@@ -166,16 +116,10 @@
             border-radius: 10px;
             transition: all 0.3s ease;
         }
-
         .developer-item:hover {
             background: #3d3d3d;
             transform: translateX(5px);
         }
-
-        .developer-item:last-child {
-            margin-bottom: 0;
-        }
-
         .developer-photo {
             width: 60px;
             height: 60px;
@@ -183,30 +127,25 @@
             object-fit: cover;
             border: 3px solid #667eea;
         }
-
         .developer-info {
             flex: 1;
         }
-
         .developer-name {
             font-size: 20px;
             font-weight: bold;
             color: #fff;
             margin-bottom: 5px;
         }
-
         .developer-role {
             font-size: 14px;
             color: #aaa;
         }
-
         .tiles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             padding: 20px;
         }
-
         .tile {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             border: 4px solid #444;
@@ -223,209 +162,176 @@
             justify-content: center;
             min-height: 280px;
         }
-
         .tile:hover {
             transform: translateY(-10px);
             border-color: #ffd700;
             box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
         }
-
         .tile-icon {
             font-size: 64px;
             margin-bottom: 20px;
         }
-
         .tile-title {
             font-size: 40px;
             font-weight: bold;
             margin-bottom: 15px;
             color: #ffd700;
         }
-
         .tile-description {
             font-size: 24px;
             color: #bbb;
             line-height: 1.4;
         }
-
         /* Unique colors for each tile */
         .tile:nth-child(1) {
             border-color: #ff6b6b;
         }
-
         .tile:nth-child(1):hover {
             border-color: #ff6b6b;
             box-shadow: 0 10px 40px rgba(255, 107, 107, 0.3);
         }
-
         .tile:nth-child(1) .tile-title {
             color: #ff6b6b;
         }
-
         .tile:nth-child(2) {
             border-color: #4ecdc4;
         }
-
         .tile:nth-child(2):hover {
             border-color: #4ecdc4;
             box-shadow: 0 10px 40px rgba(78, 205, 196, 0.3);
         }
-
         .tile:nth-child(2) .tile-title {
             color: #4ecdc4;
         }
-
         .tile:nth-child(3) {
             border-color: #95e1d3;
         }
-
         .tile:nth-child(3):hover {
             border-color: #95e1d3;
             box-shadow: 0 10px 40px rgba(149, 225, 211, 0.3);
         }
-
         .tile:nth-child(3) .tile-title {
             color: #95e1d3;
         }
-
         .tile:nth-child(4) {
             border-color: #f38181;
         }
-
         .tile:nth-child(4):hover {
             border-color: #f38181;
             box-shadow: 0 10px 40px rgba(243, 129, 129, 0.3);
         }
-
         .tile:nth-child(4) .tile-title {
             color: #f38181;
         }
-
         .tile:nth-child(5) {
             border-color: #aa96da;
         }
-
         .tile:nth-child(5):hover {
             border-color: #aa96da;
             box-shadow: 0 10px 40px rgba(170, 150, 218, 0.3);
         }
-
         .tile:nth-child(5) .tile-title {
             color: #aa96da;
         }
-
         .tile:nth-child(6) {
             border-color: #fcbad3;
         }
-
         .tile:nth-child(6):hover {
             border-color: #fcbad3;
             box-shadow: 0 10px 40px rgba(252, 186, 211, 0.3);
         }
-
         .tile:nth-child(6) .tile-title {
             color: #fcbad3;
         }
-
         .tile:nth-child(7) {
             border-color: #ffd700;
         }
-
         .tile:nth-child(7):hover {
             border-color: #ffd700;
             box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
         }
-
         .tile:nth-child(7) .tile-title {
             color: #ffd700;
         }
-
         .tile:nth-child(8) {
             border-color: #51cf66;
         }
-
         .tile:nth-child(8):hover {
             border-color: #51cf66;
             box-shadow: 0 10px 40px rgba(81, 207, 102, 0.3);
         }
-
         .tile:nth-child(8) .tile-title {
             color: #51cf66;
         }
-
-        /* --- NEW CSS START --- */
         .tile:nth-child(9) {
             border-color: #4d94ff;
         }
-
         .tile:nth-child(9):hover {
             border-color: #4d94ff;
             box-shadow: 0 10px 40px rgba(77, 148, 255, 0.3);
         }
-
         .tile:nth-child(9) .tile-title {
             color: #4d94ff;
         }
-
         .tile-icon img {
             width: 64px;
             height: 64px;
             object-fit: contain;
         }
-
-        /* --- NEW CSS END --- */
+        /* Style for the new Interactive Activities tile (10th) */
+        .tile:nth-child(10) {
+            border-color: #ff9800; /* Orange for activities */
+        }
+        .tile:nth-child(10):hover {
+            border-color: #ff9800;
+            box-shadow: 0 10px 40px rgba(255, 152, 0, 0.4);
+        }
+        .tile:nth-child(10) .tile-title {
+            color: #ff9800;
+        }
+        /* Style for the new Riddles tile (11th) */
+        .tile:nth-child(11) {
+            border-color: #9370DB; /* Medium Purple */
+        }
+        .tile:nth-child(11):hover {
+            border-color: #9370DB;
+            box-shadow: 0 10px 40px rgba(147, 112, 219, 0.5);
+        }
+        .tile:nth-child(11) .tile-title {
+            color: #9370DB;
+        }
 
         @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .school-info {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .school-name {
-                font-size: 18px;
-            }
-
             .header h1 {
                 font-size: 48px;
             }
-
             .header p {
                 font-size: 24px;
             }
-
             .developers-section {
                 position: static;
                 margin-top: 20px;
             }
-
             .developers-dropdown {
                 right: auto;
                 left: 50%;
                 transform: translateX(-50%);
             }
-
             .tiles-grid {
                 grid-template-columns: 1fr;
             }
-
             .tile-title {
                 font-size: 32px;
             }
-
             .tile-description {
                 font-size: 20px;
             }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
+        <!-- Removed top-bar content as it was not essential for the core functionality -->
         <div class="header">
             <h1>Excellence Engine</h1>
             <p>Boost Your Learning Journey</p>
@@ -436,7 +342,7 @@
                 </button>
                 <div class="developers-dropdown" id="developersDropdown">
                     <div class="developer-item">
-                        <img src="https://via.placeholder.com/60/667eea/ffffff?text=JS" alt="Developer 1"
+                        <img src="https://placehold.co/60x60/667eea/ffffff?text=TL" alt="Developer 1"
                             class="developer-photo">
                         <div class="developer-info">
                             <div class="developer-name">Tharish L</div>
@@ -444,7 +350,7 @@
                         </div>
                     </div>
                     <div class="developer-item">
-                        <img src="https://via.placeholder.com/60/764ba2/ffffff?text=AS" alt="Developer 2"
+                        <img src="https://placehold.co/60x60/764ba2/ffffff?text=MJ" alt="Developer 2"
                             class="developer-photo">
                         <div class="developer-info">
                             <div class="developer-name">Monisha JS</div>
@@ -452,7 +358,7 @@
                         </div>
                     </div>
                     <div class="developer-item">
-                        <img src="https://via.placeholder.com/60/f093fb/ffffff?text=MB" alt="Developer 3"
+                        <img src="https://placehold.co/60x60/f093fb/ffffff?text=MN" alt="Developer 3"
                             class="developer-photo">
                         <div class="developer-info">
                             <div class="developer-name">Mayurarajan NS</div>
@@ -460,7 +366,7 @@
                         </div>
                     </div>
                     <div class="developer-item">
-                        <img src="https://via.placeholder.com/60/f093fb/ffffff?text=MB" alt="Developer 4"
+                        <img src="https://placehold.co/60x60/f093fb/ffffff?text=VN" alt="Developer 4"
                             class="developer-photo">
                         <div class="developer-info">
                             <div class="developer-name">Vishvesh NI</div>
@@ -468,7 +374,7 @@
                         </div>
                     </div>
                     <div class="developer-item">
-                        <img src="https://via.placeholder.com/60/4facfe/ffffff?text=SD" alt="Developer 5"
+                        <img src="https://placehold.co/60x60/4facfe/ffffff?text=A" alt="Developer 5"
                             class="developer-photo">
                         <div class="developer-info">
                             <div class="developer-name">Anand</div>
@@ -476,7 +382,7 @@
                         </div>
                     </div>
                     <div class="developer-item">
-                        <img src="https://via.placeholder.com/60/f093fb/ffffff?text=MB" alt="Developer 6"
+                        <img src="https://placehold.co/60x60/f093fb/ffffff?text=GG" alt="Developer 6"
                             class="developer-photo">
                         <div class="developer-info">
                             <div class="developer-name">Gaurav Gadin</div>
@@ -487,12 +393,11 @@
             </div>
         </div>
         <div class="tiles-grid">
-            <a href="#" class="tile" onclick="alert('Link to Recent Notifications page'); return false;">
+            <a href="#" class="tile" onclick="console.log('Link to Recent Notifications page'); alert('Link to Recent Notifications page'); return false;">
                 <div class="tile-icon">🔔</div>
                 <div class="tile-title">Recent Notifications</div>
                 <div class="tile-description">Stay updated with latest announcements</div>
             </a>
-
             <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" target="_blank">
                 <div class="tile-icon">👁️</div>
                 <div class="tile-title">Sight Words</div>
@@ -540,13 +445,19 @@
                 <div class="tile-title">Zoko AI</div>
                 <div class="tile-description">Your AI-powered assistant</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec"
+            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUS75Mzn3/exec"
                 class="tile" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Interactive Activities</div>
                 <div class="tile-description">Watch; Play; Imagine; Repeat</div>
             </a>
-            </div>
+            <!-- NEW RIDDLES TILE (11th Child) -->
+            <a href="https://script.google.com/macros/s/AKfycbz-RIDDLES_ACTIVITY_PLACEHOLDER/exec" class="tile" target="_blank">
+                <div class="tile-icon">❓</div>
+                <div class="tile-title">Riddles</div>
+                <div class="tile-description">Challenge your mind with puzzles</div>
+            </a>
+        </div>
     </div>
     <div id="dataCaptureSection" style="display: none;">
         <div class="container">
@@ -557,9 +468,8 @@
                     style="background: #ffd700; color: #000; border: none; padding: 15px 30px; font-size: 20px; border-radius: 10px; cursor: pointer; margin-top: 20px;">←
                     Back to Dashboard</button>
             </div>
-
             <div class="tiles-grid">
-                <a href="#" class="tile" onclick="alert('Link to Recent Notifications data entry sheet'); return false;">
+                <a href="#" class="tile" onclick="console.log('Link to Recent Notifications data entry sheet'); alert('Link to Recent Notifications data entry sheet'); return false;">
                     <div class="tile-icon">🔔</div>
                     <div class="tile-title">Recent Notifications</div>
                     <div class="tile-description">Click to enter the data</div>
@@ -597,13 +507,20 @@
                 <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing"
                     class="tile" target="_blank">
                     <div class="tile-icon">🎯</div>
-                    <div classs="tile-title">Quiz</div>
+                    <div class="tile-title">Quiz</div> <!-- Fixed typo here: classs to class -->
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing"
                     class="tile" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Interactive Activities</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <!-- NEW RIDDLES DATA CAPTURE TILE -->
+                <a href="https://docs.google.com/spreadsheets/d/1_RIDDLES_DATA_SHEET_PLACEHOLDER/edit?usp=sharing"
+                    class="tile" target="_blank">
+                    <div class="tile-icon">❓</div>
+                    <div class="tile-title">Riddles</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
             </div>
