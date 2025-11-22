@@ -189,6 +189,31 @@
             transform: translateY(20px);
         }
 
+        /* --- SHORTCUT KEY TOOLTIP STYLE --- */
+        .tile::after {
+            content: attr(data-key);
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255, 215, 0, 0.15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none; /* ensure click goes through to link */
+            letter-spacing: 1px;
+        }
+
+        .tile:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Animation Trigger Class */
         .section-visible .tile {
             animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -483,7 +508,7 @@
             <h1>Excellence Engine</h1>
             <p>Boost Your Learning Journey</p>
             <div class="developers-section">
-                <button class="developers-button" onclick="showDevelopersPage()">
+                <button class="developers-button" onclick="showDevelopersPage()" title="Ctrl + Shift + M">
                     <span>👨‍💻</span>
                     <span class="developer-label">Meet Our Developers</span>
                 </button>
@@ -491,57 +516,57 @@
         </div>
 
         <div class="tiles-grid">
-            <a href="#" class="tile" onclick="console.log('Link to Recent Notifications page'); alert('Link to Recent Notifications page'); return false;">
+            <a href="#" class="tile" data-key="Ctrl + R" onclick="console.log('Link to Recent Notifications page'); alert('Link to Recent Notifications page'); return false;">
                 <div class="tile-icon">🔔</div>
                 <div class="tile-title">Recent Notifications</div>
                 <div class="tile-description">Stay updated with latest announcements</div>
             </a>
-            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" target="_blank">
+            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" data-key="Ctrl + S" target="_blank">
                 <div class="tile-icon">👁️</div>
                 <div class="tile-title">Sight Words</div>
                 <div class="tile-description">Master high-frequency words</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" data-key="Ctrl + Alt + W" target="_blank">
                 <div class="tile-icon">📖</div>
                 <div class="tile-title">Word of the Day</div>
                 <div class="tile-description">Expand your vocabulary daily</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" data-key="Ctrl + I" target="_blank">
                 <div class="tile-icon">💬</div>
                 <div class="tile-title">Idioms</div>
                 <div class="tile-description">Learn expressions and phrases</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" data-key="Ctrl + Shift + S" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Situation</div>
                 <div class="tile-description">Real-life scenarios and solutions</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" data-key="Ctrl + M" target="_blank">
                 <div class="tile-icon">🧮</div>
                 <div class="tile-title">Mental Math</div>
                 <div class="tile-description">Quick calculation challenges</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" data-key="Ctrl + Q" target="_blank">
                 <div class="tile-icon">🎯</div>
                 <div class="tile-title">Quiz</div>
                 <div class="tile-description">Test your knowledge</div>
             </a>
-            <a href="#" class="tile" onclick="showDataCapture(); return false;">
+            <a href="#" class="tile" data-key="Ctrl + Shift + D" onclick="showDataCapture(); return false;">
                 <div class="tile-icon">📊</div>
                 <div class="tile-title">Teacher Data Capture Sheet</div>
                 <div class="tile-description">Google sheet links to enter the data</div>
             </a>
-            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" target="_blank">
+            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" data-key="Ctrl + Z" target="_blank">
                 <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo"></div>
                 <div class="tile-title">Zoko AI</div>
                 <div class="tile-description">Your AI-powered assistant</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" data-key="Ctrl + Shift + I" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Interactive Activities</div>
                 <div class="tile-description">Watch; Play; Imagine; Repeat</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" data-key="Ctrl + Shift + R" target="_blank">
                 <div class="tile-icon">❓</div>
                 <div class="tile-title">Riddles</div>
                 <div class="tile-description">Challenge your mind with puzzles</div>
@@ -555,50 +580,50 @@
             <div class="header animate-enter">
                 <h1>Teacher Data Capture Sheet</h1>
                 <p>Select an activity to enter data</p>
-                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
+                <button onclick="showMainDashboard()" class="nav-btn" title="Ctrl + B">← Back to Dashboard</button>
             </div>
             <div class="tiles-grid">
-                <a href="#" class="tile" onclick="console.log('Link to Recent Notifications data entry sheet'); alert('Link to Recent Notifications data entry sheet'); return false;">
+                <a href="#" class="tile" data-key="Ctrl + R" onclick="console.log('Link to Recent Notifications data entry sheet'); alert('Link to Recent Notifications data entry sheet'); return false;">
                     <div class="tile-icon">🔔</div>
                     <div class="tile-title">Recent Notifications</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" data-key="Ctrl + S" target="_blank">
                     <div class="tile-icon">👁️</div>
                     <div class="tile-title">Sight Words</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" data-key="Ctrl + Alt + W" target="_blank">
                     <div class="tile-icon">📖</div>
                     <div class="tile-title">Word of the Day</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" data-key="Ctrl + I" target="_blank">
                     <div class="tile-icon">💬</div>
                     <div class="tile-title">Idioms</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + S" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Situation</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" data-key="Ctrl + M" target="_blank">
                     <div class="tile-icon">🧮</div>
                     <div class="tile-title">Mental Math</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" data-key="Ctrl + Q" target="_blank">
                     <div class="tile-icon">🎯</div>
                     <div class="tile-title">Quiz</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + I" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Interactive Activities</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + R" target="_blank">
                     <div class="tile-icon">❓</div>
                     <div class="tile-title">Riddles</div>
                     <div class="tile-description">Click to enter the data</div>
@@ -613,7 +638,7 @@
             <div class="header animate-enter">
                 <h1>Meet the Minds</h1>
                 <p>The Architects of Excellence Engine</p>
-                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
+                <button onclick="showMainDashboard()" class="nav-btn" title="Ctrl + B">← Back to Dashboard</button>
             </div>
 
             <div class="dev-grid">
@@ -746,7 +771,6 @@
         function hideAll() {
             Object.values(sections).forEach(section => {
                 section.style.display = 'none';
-                // Remove the class so animations can restart when added back
                 section.classList.remove('section-visible');
             });
         }
@@ -754,16 +778,9 @@
         function switchSection(sectionId) {
             hideAll();
             const target = sections[sectionId];
-            
-            // 1. Make it visible (display: block)
             target.style.display = 'block';
-            
-            // 2. Trigger reflow to allow CSS animation to restart
             void target.offsetWidth; 
-            
-            // 3. Add the animation trigger class
             target.classList.add('section-visible');
-            
             window.scrollTo(0, 0);
         }
 
@@ -778,6 +795,148 @@
         function showDevelopersPage() {
             switchSection('developers');
         }
+
+        // --- KEYBOARD SHORTCUT LOGIC ---
+        
+        // Helper function to safely open links or run alerts
+        function executeAction(dashboardUrl, captureUrl, isAlert = false, alertMsg = "") {
+            if (sections.dashboard.style.display !== 'none' && dashboardUrl) {
+                if(isAlert) { console.log(alertMsg); alert(alertMsg); }
+                else { window.open(dashboardUrl, '_blank'); }
+            } else if (sections.dataCapture.style.display !== 'none' && captureUrl) {
+                if(isAlert) { console.log(alertMsg); alert(alertMsg); }
+                else { window.open(captureUrl, '_blank'); }
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            // Common Navigation Shortcuts
+            
+            // Ctrl + Shift + D = Teacher Data Capture
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') {
+                e.preventDefault();
+                showDataCapture();
+                return;
+            }
+
+            // Ctrl + Shift + M = Meet Developers
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'm') {
+                e.preventDefault();
+                showDevelopersPage();
+                return;
+            }
+
+            // Ctrl + B = Back to Dashboard
+            if (e.ctrlKey && e.key.toLowerCase() === 'b') {
+                e.preventDefault();
+                showMainDashboard();
+                return;
+            }
+
+            // --- Content Shortcuts (Context Sensitive) ---
+
+            // Ctrl + R = Recent Notifications
+            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'r') {
+                e.preventDefault(); // Stop browser refresh
+                if (sections.dashboard.style.display !== 'none') {
+                    console.log('Link to Recent Notifications page'); 
+                    alert('Link to Recent Notifications page');
+                } else if (sections.dataCapture.style.display !== 'none') {
+                    console.log('Link to Recent Notifications data entry sheet'); 
+                    alert('Link to Recent Notifications data entry sheet');
+                }
+                return;
+            }
+
+            // Ctrl + S = Sight Words
+            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 's') {
+                e.preventDefault(); // Stop browser save
+                executeAction(
+                    'https://tinyurl.com/CCCEEEwordcraft', 
+                    'https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing'
+                );
+                return;
+            }
+
+            // Ctrl + Alt + W = Word of the Day
+            if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'w') {
+                e.preventDefault();
+                executeAction(
+                    'https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec', 
+                    'https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing'
+                );
+                return;
+            }
+
+            // Ctrl + I = Idioms
+            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'i') {
+                e.preventDefault();
+                executeAction(
+                    'https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec', 
+                    'https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing'
+                );
+                return;
+            }
+
+            // Ctrl + Shift + S = Situation
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 's') {
+                e.preventDefault();
+                executeAction(
+                    'https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec', 
+                    'https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing'
+                );
+                return;
+            }
+
+            // Ctrl + M = Mental Math
+            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'm') {
+                e.preventDefault();
+                executeAction(
+                    'https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec', 
+                    'https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing'
+                );
+                return;
+            }
+
+            // Ctrl + Q = Quiz
+            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'q') {
+                e.preventDefault();
+                executeAction(
+                    'https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec', 
+                    'https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing'
+                );
+                return;
+            }
+
+            // Ctrl + Z = Zoko AI (Only on Dashboard)
+            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'z') {
+                e.preventDefault(); // Undo is default
+                if (sections.dashboard.style.display !== 'none') {
+                    window.open('https://tinyurl.com/zoko-ai-assistant', '_blank');
+                }
+                return;
+            }
+
+            // Ctrl + Shift + I = Interactive Activities
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+                e.preventDefault(); // Usually opens dev tools
+                executeAction(
+                    'https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec', 
+                    'https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing'
+                );
+                return;
+            }
+
+            // Ctrl + Shift + R = Riddles
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'r') {
+                e.preventDefault(); // Usually hard reload
+                executeAction(
+                    'https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec', 
+                    'https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing'
+                );
+                return;
+            }
+        });
     </script>
 </body>
 </html>
