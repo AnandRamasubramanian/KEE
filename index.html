@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excellence Engine</title>
-    <!-- Removed unnecessary external Kaspersky script -->
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=c2PQm5GVh7ZwVAgZGyoXly-oeK4sLu1mSrjFBPtNEnPjczqzL__EQ0tenPe2WxX8zAzj_sbemjL36GHMiQXwiw" charset="UTF-8"></script>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #050505;
+            background: #050505; /* Slightly lighter than pure black for depth */
             color: #fff;
             min-height: 100vh;
             padding: 40px 20px;
@@ -47,6 +47,7 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
+        /* Utility class to trigger animations */
         .animate-enter {
             animation: popIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
@@ -56,7 +57,7 @@
             text-align: center;
             margin-bottom: 60px;
             position: relative;
-            opacity: 0;
+            opacity: 0; /* Hidden initially for animation */
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
@@ -94,18 +95,18 @@
             color: #fff;
             font-size: 28px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             width: 60px;
             height: 60px;
+            overflow: hidden;
             white-space: nowrap;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
             text-decoration: none;
             z-index: 10;
-            position: relative;
         }
 
         .developers-button:hover {
@@ -119,10 +120,9 @@
         .developer-label {
             font-size: 18px;
             opacity: 0;
-            transition: opacity 0.3s ease 0.1s;
+            transition: opacity 0.3s ease 0.1s; /* Slight delay */
             max-width: 0;
             overflow: hidden;
-            white-space: nowrap;
         }
 
         .developers-button:hover .developer-label {
@@ -130,7 +130,7 @@
             max-width: 200px;
         }
 
-        /* --- Navigation Buttons --- */
+        /* --- Navigation Buttons (Back Buttons) --- */
         .nav-btn {
             background: #ffd700;
             color: #000;
@@ -143,7 +143,6 @@
             font-weight: bold;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            position: relative;
         }
         .nav-btn:hover {
             transform: scale(1.05) translateY(-2px);
@@ -153,50 +152,6 @@
         .nav-btn:active {
             transform: scale(0.95);
         }
-
-        /* --- TOOLTIPS FOR BUTTONS (NEW) --- */
-        [data-shortcut]:not(.tile)::after {
-            content: attr(data-shortcut);
-            position: absolute;
-            background: rgba(0, 0, 0, 0.9);
-            color: #ffd700;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: bold;
-            border: 1px solid #444;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            white-space: nowrap;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-
-        [data-shortcut]:not(.tile):hover::after {
-            opacity: 1;
-        }
-
-        /* Specific position for Developers Button (Bottom Right relative to button) */
-        .developers-button[data-shortcut]::after {
-            top: 110%;
-            right: 0;
-            transform: translateY(-5px);
-        }
-        .developers-button[data-shortcut]:hover::after {
-            transform: translateY(0);
-        }
-
-        /* Specific position for Nav Buttons (Right side) */
-        .nav-btn[data-shortcut]::after {
-            left: 105%;
-            top: 50%;
-            transform: translateY(-50%) translateX(-5px);
-        }
-        .nav-btn[data-shortcut]:hover::after {
-            transform: translateY(-50%) translateX(0);
-        }
-
 
         /* --- Tile Grid Styles --- */
         .tiles-grid {
@@ -223,39 +178,15 @@
             min-height: 280px;
             position: relative;
             overflow: hidden;
+            /* Smooth transitions for hover */
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
                         box-shadow 0.4s ease, 
                         border-color 0.3s ease,
                         background 0.3s ease;
+            
+            /* Initial State for Staggered Animation */
             opacity: 0;
             transform: translateY(20px);
-        }
-
-        /* Shortcut Badge Tooltip for Tiles */
-        .tile[data-shortcut]::after {
-            content: attr(data-shortcut);
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.85);
-            color: #ffd700;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            border: 1px solid #444;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            z-index: 10;
-        }
-
-        .tile:hover::after {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         /* Animation Trigger Class */
@@ -263,7 +194,7 @@
             animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        /* Staggered Delays */
+        /* Staggered Delays for Tiles (up to 12 items) */
         .section-visible .tile:nth-child(1) { animation-delay: 0.05s; }
         .section-visible .tile:nth-child(2) { animation-delay: 0.1s; }
         .section-visible .tile:nth-child(3) { animation-delay: 0.15s; }
@@ -370,8 +301,8 @@
 
 
         /* =========================================
-            DEVELOPERS PAGE STYLES
-            ========================================= */
+           NEW STYLES FOR DETAILED DEVELOPERS PAGE
+           ========================================= */
         
         .dev-grid {
             display: grid;
@@ -386,9 +317,11 @@
             overflow: hidden;
             position: relative;
             border: 2px solid #333;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy feel */
             display: flex;
             flex-direction: column;
+            
+            /* Initial State for Animation */
             opacity: 0;
             transform: translateY(30px);
         }
@@ -397,6 +330,7 @@
             animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
+        /* Staggered delays for dev cards */
         .section-visible .dev-card:nth-child(1) { animation-delay: 0.1s; }
         .section-visible .dev-card:nth-child(2) { animation-delay: 0.2s; }
         .section-visible .dev-card:nth-child(3) { animation-delay: 0.3s; }
@@ -404,6 +338,7 @@
         .section-visible .dev-card:nth-child(5) { animation-delay: 0.5s; }
         .section-visible .dev-card:nth-child(6) { animation-delay: 0.6s; }
 
+        /* Hover Effects */
         .dev-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
@@ -471,6 +406,7 @@
             transform: translateX(5px);
         }
 
+        /* Badge Colors */
         .badge-lead { background: rgba(102, 126, 234, 0.2); color: #a3b1f0; border: 1px solid #667eea; }
         .badge-front { background: rgba(118, 75, 162, 0.2); color: #cdb4eb; border: 1px solid #764ba2; }
         .badge-back { background: rgba(240, 147, 251, 0.2); color: #fbcffb; border: 1px solid #f093fb; }
@@ -520,6 +456,7 @@
             transform: scale(1.2);
         }
 
+        /* Media Queries */
         @media (max-width: 768px) {
             .header h1 { font-size: 48px; }
             .header p { font-size: 24px; }
@@ -540,13 +477,13 @@
 <body>
 
     <!-- MAIN DASHBOARD SECTION -->
+    <!-- Added class "section-visible" initially so animations play on load -->
     <div id="mainDashboard" class="container section-visible">
         <div class="header">
             <h1>Excellence Engine</h1>
             <p>Boost Your Learning Journey</p>
             <div class="developers-section">
-                <!-- Added data-shortcut for developers page -->
-                <button class="developers-button" data-shortcut="Ctrl + Shift + M" onclick="showDevelopersPage()">
+                <button class="developers-button" onclick="showDevelopersPage()">
                     <span>👨‍💻</span>
                     <span class="developer-label">Meet Our Developers</span>
                 </button>
@@ -554,59 +491,57 @@
         </div>
 
         <div class="tiles-grid">
-            <!-- Tiles -->
-            <!-- Removed alert() from onclick handler -->
-            <a href="#" class="tile" data-key="notifications" data-shortcut="Ctrl + R" onclick="console.log('Link to Recent Notifications page'); return false;">
+            <a href="#" class="tile" onclick="console.log('Link to Recent Notifications page'); alert('Link to Recent Notifications page'); return false;">
                 <div class="tile-icon">🔔</div>
                 <div class="tile-title">Recent Notifications</div>
                 <div class="tile-description">Stay updated with latest announcements</div>
             </a>
-            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" data-key="sightwords" data-shortcut="Ctrl + S" target="_blank">
+            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" target="_blank">
                 <div class="tile-icon">👁️</div>
                 <div class="tile-title">Sight Words</div>
                 <div class="tile-description">Master high-frequency words</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" data-key="wordofday" data-shortcut="Ctrl + Alt + W" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" target="_blank">
                 <div class="tile-icon">📖</div>
                 <div class="tile-title">Word of the Day</div>
                 <div class="tile-description">Expand your vocabulary daily</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" data-key="idioms" data-shortcut="Ctrl + I" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" target="_blank">
                 <div class="tile-icon">💬</div>
                 <div class="tile-title">Idioms</div>
                 <div class="tile-description">Learn expressions and phrases</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" data-key="situation" data-shortcut="Ctrl + Shift + S" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Situation</div>
                 <div class="tile-description">Real-life scenarios and solutions</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" data-key="mentalmath" data-shortcut="Ctrl + M" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" target="_blank">
                 <div class="tile-icon">🧮</div>
                 <div class="tile-title">Mental Math</div>
                 <div class="tile-description">Quick calculation challenges</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLhfcCHR8g/exec" class="tile" data-key="quiz" data-shortcut="Ctrl + Q" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" target="_blank">
                 <div class="tile-icon">🎯</div>
                 <div class="tile-title">Quiz</div>
                 <div class="tile-description">Test your knowledge</div>
             </a>
-            <a href="#" class="tile" data-key="datacapture" data-shortcut="Ctrl + Shift + D" onclick="showDataCapture(); return false;">
+            <a href="#" class="tile" onclick="showDataCapture(); return false;">
                 <div class="tile-icon">📊</div>
                 <div class="tile-title">Teacher Data Capture Sheet</div>
                 <div class="tile-description">Google sheet links to enter the data</div>
             </a>
-            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" data-key="zoko" data-shortcut="Ctrl + Z" target="_blank">
+            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" target="_blank">
                 <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo"></div>
                 <div class="tile-title">Zoko AI</div>
                 <div class="tile-description">Your AI-powered assistant</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" data-key="interactive" data-shortcut="Ctrl + Shift + I" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Interactive Activities</div>
                 <div class="tile-description">Watch; Play; Imagine; Repeat</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" data-key="riddles" data-shortcut="Ctrl + Shift + R" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" target="_blank">
                 <div class="tile-icon">❓</div>
                 <div class="tile-title">Riddles</div>
                 <div class="tile-description">Challenge your mind with puzzles</div>
@@ -620,58 +555,50 @@
             <div class="header animate-enter">
                 <h1>Teacher Data Capture Sheet</h1>
                 <p>Select an activity to enter data</p>
-                <!-- Added data-shortcut for Dashboard -->
-                <button onclick="showMainDashboard()" class="nav-btn" data-shortcut="Ctrl + B">← Back to Dashboard</button>
+                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
             </div>
             <div class="tiles-grid">
-                <!-- Tiles - ALL links and onclicks updated for consistency and correctness. -->
-                <a href="https://docs.google.com/spreadsheets/d/1_Notifications_Placeholder/edit?usp=sharing" class="tile" data-key="notifications" data-shortcut="Ctrl + R" target="_blank">
+                <a href="#" class="tile" onclick="console.log('Link to Recent Notifications data entry sheet'); alert('Link to Recent Notifications data entry sheet'); return false;">
                     <div class="tile-icon">🔔</div>
                     <div class="tile-title">Recent Notifications</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" data-key="sightwords" data-shortcut="Ctrl + S" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">👁️</div>
                     <div class="tile-title">Sight Words</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" data-key="wordofday" data-shortcut="Ctrl + Alt + W" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">📖</div>
                     <div class="tile-title">Word of the Day</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" data-key="idioms" data-shortcut="Ctrl + I" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">💬</div>
                     <div class="tile-title">Idioms</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" data-key="situation" data-shortcut="Ctrl + Shift + S" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Situation</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" data-key="mentalmath" data-shortcut="Ctrl + M" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🧮</div>
                     <div class="tile-title">Mental Math</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" data-key="quiz" data-shortcut="Ctrl + Q" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎯</div>
                     <div class="tile-title">Quiz</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <!-- This tile is just for navigation, so no need for data key -->
-                <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" data-key="zoko" data-shortcut="Ctrl + Z" target="_blank">
-                    <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo"></div>
-                    <div class="tile-title">Zoko AI</div>
-                    <div class="tile-description">Click to access the AI assistant</div>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" data-key="interactive" data-shortcut="Ctrl + Shift + I" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Interactive Activities</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" data-key="riddles" data-shortcut="Ctrl + Shift + R" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">❓</div>
                     <div class="tile-title">Riddles</div>
                     <div class="tile-description">Click to enter the data</div>
@@ -686,12 +613,11 @@
             <div class="header animate-enter">
                 <h1>Meet the Minds</h1>
                 <p>The Architects of Excellence Engine</p>
-                <!-- Added data-shortcut for Dashboard -->
-                <button onclick="showMainDashboard()" class="nav-btn" data-shortcut="Ctrl + B">← Back to Dashboard</button>
+                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
             </div>
 
             <div class="dev-grid">
-                <!-- Developer Cards (Same as before) -->
+                <!-- Developer 1 -->
                 <div class="dev-card lead-dev">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/667eea/ffffff?text=TL" alt="Tharish L" class="dev-photo-large">
@@ -709,6 +635,8 @@
                         </ul>
                     </div>
                 </div>
+
+                <!-- Developer 2 -->
                 <div class="dev-card frontend">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/764ba2/ffffff?text=MJ" alt="Monisha JS" class="dev-photo-large">
@@ -726,6 +654,8 @@
                         </ul>
                     </div>
                 </div>
+
+                <!-- Developer 3 -->
                 <div class="dev-card backend">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/f093fb/ffffff?text=MN" alt="Mayurarajan NS" class="dev-photo-large">
@@ -743,6 +673,8 @@
                         </ul>
                     </div>
                 </div>
+
+                <!-- Developer 4 -->
                 <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/4facfe/ffffff?text=VN" alt="Vishvesh NI" class="dev-photo-large">
@@ -760,6 +692,8 @@
                         </ul>
                     </div>
                 </div>
+
+                <!-- Developer 5 -->
                 <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/4facfe/ffffff?text=A" alt="Anand" class="dev-photo-large">
@@ -777,6 +711,8 @@
                         </ul>
                     </div>
                 </div>
+
+                 <!-- Developer 6 -->
                  <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/f093fb/ffffff?text=GG" alt="Gaurav Gadin" class="dev-photo-large">
@@ -794,6 +730,7 @@
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -809,6 +746,7 @@
         function hideAll() {
             Object.values(sections).forEach(section => {
                 section.style.display = 'none';
+                // Remove the class so animations can restart when added back
                 section.classList.remove('section-visible');
             });
         }
@@ -816,112 +754,30 @@
         function switchSection(sectionId) {
             hideAll();
             const target = sections[sectionId];
-            if (target) {
-                target.style.display = 'block';
-                // Trigger reflow to restart CSS animation
-                void target.offsetWidth; 
-                target.classList.add('section-visible');
-                window.scrollTo(0, 0);
-            }
+            
+            // 1. Make it visible (display: block)
+            target.style.display = 'block';
+            
+            // 2. Trigger reflow to allow CSS animation to restart
+            void target.offsetWidth; 
+            
+            // 3. Add the animation trigger class
+            target.classList.add('section-visible');
+            
+            window.scrollTo(0, 0);
         }
 
-        function showMainDashboard() { switchSection('dashboard'); }
-        function showDataCapture() { switchSection('dataCapture'); }
-        function showDevelopersPage() { switchSection('developers'); }
+        function showMainDashboard() {
+            switchSection('dashboard');
+        }
 
-        // --- SHORTCUT KEYS IMPLEMENTATION ---
-        document.addEventListener('keydown', function(e) {
-            
-            // Helper variables
-            const key = e.key.toLowerCase();
-            const ctrl = e.ctrlKey || e.metaKey; // Handle Mac Command key too
-            const shift = e.shiftKey;
-            const alt = e.altKey;
+        function showDataCapture() {
+            switchSection('dataCapture');
+        }
 
-            // We only care if CTRL is pressed
-            if (!ctrl) return;
-
-            let actionKey = null;
-
-            // 1. Check Ctrl + Alt combos
-            if (alt) {
-                if (key === 'w') actionKey = 'wordofday';
-            }
-            // 2. Check Ctrl + Shift combos
-            else if (shift) {
-                if (key === 's') actionKey = 'situation';
-                else if (key === 'i') actionKey = 'interactive';
-                else if (key === 'r') actionKey = 'riddles';
-                else if (key === 'd') actionKey = 'datacapture'; 
-                else if (key === 'm') actionKey = 'developers'; // Added Developers
-            } 
-            // 3. Check Ctrl only combos
-            else {
-                if (key === 'r') actionKey = 'notifications';
-                else if (key === 's') actionKey = 'sightwords';
-                else if (key === 'i') actionKey = 'idioms';
-                else if (key === 'm') actionKey = 'mentalmath';
-                else if (key === 'q') actionKey = 'quiz';
-                else if (key === 'z') actionKey = 'zoko';
-                else if (key === 'b') actionKey = 'dashboard'; // Added Dashboard
-            }
-
-            // If a valid shortcut was pressed
-            if (actionKey) {
-                // Determine the currently visible section
-                let activeSection = null;
-                let activeSectionId = null;
-                for (const key in sections) {
-                    if (sections[key].style.display !== 'none') {
-                        activeSection = sections[key];
-                        activeSectionId = key;
-                        break;
-                    }
-                }
-                
-                // If no active section is found, assume dashboard is the default
-                if (!activeSection) {
-                    activeSection = sections.dashboard;
-                    activeSectionId = 'dashboard';
-                }
-
-                // DIRECT FUNCTION CALLS FOR NAVIGATION SHORTCUTS
-                if (actionKey === 'datacapture') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Shortcut triggered: datacapture');
-                    showDataCapture();
-                    return;
-                }
-                if (actionKey === 'developers') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Shortcut triggered: developers');
-                    showDevelopersPage();
-                    return;
-                }
-                if (actionKey === 'dashboard') {
-                    // Only prevent default if we are currently NOT on the dashboard
-                    if (activeSectionId !== 'dashboard') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        console.log('Shortcut triggered: dashboard');
-                        showMainDashboard();
-                    }
-                    return;
-                }
-
-                // Standard handling for tiles (links)
-                const targetTile = activeSection.querySelector(`.tile[data-key="${actionKey}"]`);
-                if (targetTile) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log(`Shortcut triggered: ${actionKey} in section: ${activeSectionId}`);
-                    // Trigger click on the <a> element, which follows the href and target="_blank"
-                    targetTile.click();
-                }
-            }
-        });
+        function showDevelopersPage() {
+            switchSection('developers');
+        }
     </script>
 </body>
 </html>
