@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excellence Engine</title>
-    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=c2PQm5GVh7ZwVAgZGyoXly-oeK4sLu1mSrjFBPtNEnPjczqzL__EQ0tenPe2WxX8zAzj_sbemjL36GHMiQXwiw" charset="UTF-8"></script>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=QnckGtBOsSO8QfH1kTMgAaLRk2UguTOkTLy0uNQWNEvQCOlyjpTTqe5h_BoOnF4YZkEGbC4ZiFA97lkNRdZnZg" charset="UTF-8"></script>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #050505; /* Slightly lighter than pure black for depth */
+            background: #050505;
             color: #fff;
             min-height: 100vh;
             padding: 40px 20px;
@@ -32,14 +32,8 @@
 
         /* --- Animation Keyframes --- */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes popIn {
@@ -47,7 +41,6 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* Utility class to trigger animations */
         .animate-enter {
             animation: popIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
@@ -57,7 +50,7 @@
             text-align: center;
             margin-bottom: 60px;
             position: relative;
-            opacity: 0; /* Hidden initially for animation */
+            opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
@@ -80,14 +73,18 @@
             color: #aaa;
         }
 
-        /* --- Dashboard Top Button --- */
-        .developers-section {
+        /* --- Top Right Buttons Container --- */
+        .top-controls {
             position: absolute;
             top: 0;
             right: 0;
+            display: flex;
+            gap: 15px;
+            flex-direction: row-reverse; /* Align to right */
         }
 
-        .developers-button {
+        /* Developer & History Buttons */
+        .icon-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: 3px solid #667eea;
             border-radius: 30px;
@@ -95,7 +92,7 @@
             color: #fff;
             font-size: 28px;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -109,28 +106,38 @@
             z-index: 10;
         }
 
-        .developers-button:hover {
+        .icon-btn.history-btn {
+            background: linear-gradient(135deg, #434343 0%, #000000 100%);
+            border-color: #ffd700;
+            color: #ffd700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .icon-btn:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.8);
             width: auto;
             padding-right: 25px;
             border-color: #fff;
         }
+        
+        .icon-btn.history-btn:hover {
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        }
 
-        .developer-label {
+        .btn-label {
             font-size: 18px;
             opacity: 0;
-            transition: opacity 0.3s ease 0.1s; /* Slight delay */
+            transition: opacity 0.3s ease 0.1s;
             max-width: 0;
             overflow: hidden;
         }
 
-        .developers-button:hover .developer-label {
+        .icon-btn:hover .btn-label {
             opacity: 1;
             max-width: 200px;
         }
 
-        /* --- Navigation Buttons (Back Buttons) --- */
+        /* --- Navigation Buttons --- */
         .nav-btn {
             background: #ffd700;
             color: #000;
@@ -149,8 +156,14 @@
             background: #ffed4a;
             box-shadow: 0 8px 15px rgba(255, 215, 0, 0.4);
         }
-        .nav-btn:active {
-            transform: scale(0.95);
+        .nav-btn.danger {
+            background: #ff4b4b;
+            color: white;
+            margin-left: 10px;
+        }
+        .nav-btn.danger:hover {
+            background: #ff6b6b;
+            box-shadow: 0 8px 15px rgba(255, 75, 75, 0.4);
         }
 
         /* --- Tile Grid Styles --- */
@@ -161,7 +174,6 @@
             padding: 20px;
         }
 
-        /* Base Tile Style */
         .tile {
             background: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
             border: 4px solid #444;
@@ -178,18 +190,11 @@
             min-height: 280px;
             position: relative;
             overflow: hidden;
-            /* Smooth transitions for hover */
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                        box-shadow 0.4s ease, 
-                        border-color 0.3s ease,
-                        background 0.3s ease;
-            
-            /* Initial State for Staggered Animation */
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.3s ease, background 0.3s ease;
             opacity: 0;
             transform: translateY(20px);
         }
 
-        /* --- SHORTCUT KEY TOOLTIP STYLE --- */
         .tile::after {
             content: attr(data-key);
             position: absolute;
@@ -205,21 +210,15 @@
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.3s ease;
-            pointer-events: none; /* ensure click goes through to link */
+            pointer-events: none;
             letter-spacing: 1px;
         }
 
-        .tile:hover::after {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .tile:hover::after { opacity: 1; transform: translateY(0); }
 
-        /* Animation Trigger Class */
-        .section-visible .tile {
-            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        /* Staggered Delays for Tiles (up to 12 items) */
+        .section-visible .tile { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        
+        /* Staggered Delays */
         .section-visible .tile:nth-child(1) { animation-delay: 0.05s; }
         .section-visible .tile:nth-child(2) { animation-delay: 0.1s; }
         .section-visible .tile:nth-child(3) { animation-delay: 0.15s; }
@@ -233,284 +232,158 @@
         .section-visible .tile:nth-child(11) { animation-delay: 0.55s; }
         .section-visible .tile:nth-child(12) { animation-delay: 0.6s; }
 
-        /* Hover Effects */
         .tile:hover {
             transform: translateY(-12px) scale(1.02);
             background: linear-gradient(145deg, #202020 0%, #303030 100%);
             z-index: 2;
         }
-        
-        .tile:active {
-            transform: scale(0.98);
-        }
+        .tile:active { transform: scale(0.98); }
+        .tile-icon { font-size: 64px; margin-bottom: 20px; transition: transform 0.4s ease; }
+        .tile:hover .tile-icon { transform: scale(1.2) rotate(5deg); }
+        .tile-title { font-size: 40px; font-weight: bold; margin-bottom: 15px; color: #ffd700; transition: color 0.3s ease; }
+        .tile-description { font-size: 24px; color: #bbb; line-height: 1.4; transition: color 0.3s ease; }
+        .tile:hover .tile-description { color: #fff; }
 
-        .tile-icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            transition: transform 0.4s ease;
-        }
-        
-        .tile:hover .tile-icon {
-            transform: scale(1.2) rotate(5deg);
-        }
+        /* Tile Colors (Border & Hover) */
+        .tile:nth-child(1) { border-color: #ff6b6b; } .tile:nth-child(1):hover { box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4); } .tile:nth-child(1) .tile-title { color: #ff6b6b; }
+        .tile:nth-child(2) { border-color: #4ecdc4; } .tile:nth-child(2):hover { box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4); } .tile:nth-child(2) .tile-title { color: #4ecdc4; }
+        .tile:nth-child(3) { border-color: #95e1d3; } .tile:nth-child(3):hover { box-shadow: 0 15px 40px rgba(149, 225, 211, 0.4); } .tile:nth-child(3) .tile-title { color: #95e1d3; }
+        .tile:nth-child(4) { border-color: #f38181; } .tile:nth-child(4):hover { box-shadow: 0 15px 40px rgba(243, 129, 129, 0.4); } .tile:nth-child(4) .tile-title { color: #f38181; }
+        .tile:nth-child(5) { border-color: #aa96da; } .tile:nth-child(5):hover { box-shadow: 0 15px 40px rgba(170, 150, 218, 0.4); } .tile:nth-child(5) .tile-title { color: #aa96da; }
+        .tile:nth-child(6) { border-color: #fcbad3; } .tile:nth-child(6):hover { box-shadow: 0 15px 40px rgba(252, 186, 211, 0.4); } .tile:nth-child(6) .tile-title { color: #fcbad3; }
+        .tile:nth-child(7) { border-color: #ffd700; } .tile:nth-child(7):hover { box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4); }
+        .tile:nth-child(8) { border-color: #51cf66; } .tile:nth-child(8):hover { box-shadow: 0 15px 40px rgba(81, 207, 102, 0.4); } .tile:nth-child(8) .tile-title { color: #51cf66; }
+        .tile:nth-child(9) { border-color: #4d94ff; } .tile:nth-child(9):hover { box-shadow: 0 15px 40px rgba(77, 148, 255, 0.4); } .tile:nth-child(9) .tile-title { color: #4d94ff; }
+        .tile-icon img { width: 64px; height: 64px; object-fit: contain; transition: transform 0.4s ease; }
+        .tile:nth-child(10) { border-color: #ff9800; } .tile:nth-child(10):hover { box-shadow: 0 15px 40px rgba(255, 152, 0, 0.5); } .tile:nth-child(10) .tile-title { color: #ff9800; }
+        .tile:nth-child(11) { border-color: #9370DB; } .tile:nth-child(11):hover { box-shadow: 0 15px 40px rgba(147, 112, 219, 0.5); } .tile:nth-child(11) .tile-title { color: #9370DB; }
 
-        .tile-title {
-            font-size: 40px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #ffd700;
-            transition: color 0.3s ease;
-        }
-
-        .tile-description {
-            font-size: 24px;
-            color: #bbb;
-            line-height: 1.4;
-            transition: color 0.3s ease;
-        }
-        
-        .tile:hover .tile-description {
-            color: #fff;
-        }
-
-        /* Unique Tile Colors */
-        .tile:nth-child(1) { border-color: #ff6b6b; }
-        .tile:nth-child(1):hover { box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4); border-color: #ff8787; }
-        .tile:nth-child(1) .tile-title { color: #ff6b6b; }
-
-        .tile:nth-child(2) { border-color: #4ecdc4; }
-        .tile:nth-child(2):hover { box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4); border-color: #66e3da; }
-        .tile:nth-child(2) .tile-title { color: #4ecdc4; }
-
-        .tile:nth-child(3) { border-color: #95e1d3; }
-        .tile:nth-child(3):hover { box-shadow: 0 15px 40px rgba(149, 225, 211, 0.4); border-color: #b2f0e4; }
-        .tile:nth-child(3) .tile-title { color: #95e1d3; }
-
-        .tile:nth-child(4) { border-color: #f38181; }
-        .tile:nth-child(4):hover { box-shadow: 0 15px 40px rgba(243, 129, 129, 0.4); border-color: #ff9e9e; }
-        .tile:nth-child(4) .tile-title { color: #f38181; }
-
-        .tile:nth-child(5) { border-color: #aa96da; }
-        .tile:nth-child(5):hover { box-shadow: 0 15px 40px rgba(170, 150, 218, 0.4); border-color: #c5b2f2; }
-        .tile:nth-child(5) .tile-title { color: #aa96da; }
-
-        .tile:nth-child(6) { border-color: #fcbad3; }
-        .tile:nth-child(6):hover { box-shadow: 0 15px 40px rgba(252, 186, 211, 0.4); border-color: #ffd4e6; }
-        .tile:nth-child(6) .tile-title { color: #fcbad3; }
-
-        .tile:nth-child(7) { border-color: #ffd700; }
-        .tile:nth-child(7):hover { box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4); border-color: #ffe44d; }
-
-        .tile:nth-child(8) { border-color: #51cf66; }
-        .tile:nth-child(8):hover { box-shadow: 0 15px 40px rgba(81, 207, 102, 0.4); border-color: #6fe082; }
-        .tile:nth-child(8) .tile-title { color: #51cf66; }
-
-        .tile:nth-child(9) { border-color: #4d94ff; }
-        .tile:nth-child(9):hover { box-shadow: 0 15px 40px rgba(77, 148, 255, 0.4); border-color: #7db4ff; }
-        .tile:nth-child(9) .tile-title { color: #4d94ff; }
-
-        .tile-icon img {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-            transition: transform 0.4s ease;
-        }
-
-        .tile:nth-child(10) { border-color: #ff9800; }
-        .tile:nth-child(10):hover { box-shadow: 0 15px 40px rgba(255, 152, 0, 0.5); border-color: #ffac33; }
-        .tile:nth-child(10) .tile-title { color: #ff9800; }
-
-        .tile:nth-child(11) { border-color: #9370DB; }
-        .tile:nth-child(11):hover { box-shadow: 0 15px 40px rgba(147, 112, 219, 0.5); border-color: #ab8ceb; }
-        .tile:nth-child(11) .tile-title { color: #9370DB; }
-
-
-        /* =========================================
-           NEW STYLES FOR DETAILED DEVELOPERS PAGE
-           ========================================= */
-        
-        .dev-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            padding: 40px 0;
-        }
-
-        .dev-card {
+        /* --- HISTORY PAGE STYLES --- */
+        .history-container {
             background: #1a1a1a;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
             border: 2px solid #333;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy feel */
-            display: flex;
-            flex-direction: column;
-            
-            /* Initial State for Animation */
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .section-visible .dev-card {
-            animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            overflow-x: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Staggered delays for dev cards */
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #ddd;
+            font-size: 18px;
+        }
+
+        .history-table th, .history-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .history-table th {
+            background: #252525;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        .history-table tr {
+            transition: background 0.2s ease;
+        }
+
+        .history-table tr:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+        
+        .history-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-tool { background: rgba(102, 126, 234, 0.2); color: #a3b1f0; border: 1px solid #667eea; }
+        .badge-data { background: rgba(255, 107, 107, 0.2); color: #ff8787; border: 1px solid #ff6b6b; }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* --- DEVELOPER CARDS STYLES --- */
+        .dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; padding: 40px 0; }
+        .dev-card { background: #1a1a1a; border-radius: 20px; overflow: hidden; position: relative; border: 2px solid #333; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; opacity: 0; transform: translateY(30px); }
+        .section-visible .dev-card { animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         .section-visible .dev-card:nth-child(1) { animation-delay: 0.1s; }
         .section-visible .dev-card:nth-child(2) { animation-delay: 0.2s; }
         .section-visible .dev-card:nth-child(3) { animation-delay: 0.3s; }
         .section-visible .dev-card:nth-child(4) { animation-delay: 0.4s; }
         .section-visible .dev-card:nth-child(5) { animation-delay: 0.5s; }
         .section-visible .dev-card:nth-child(6) { animation-delay: 0.6s; }
-
-        /* Hover Effects */
-        .dev-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            z-index: 2;
-        }
-
-        .dev-card.lead-dev { border-color: #667eea; }
-        .dev-card.lead-dev:hover { box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3); border-color: #889df5; }
-
-        .dev-card.frontend { border-color: #764ba2; }
-        .dev-card.frontend:hover { box-shadow: 0 15px 50px rgba(118, 75, 162, 0.3); border-color: #996ccf; }
-
-        .dev-card.backend { border-color: #f093fb; }
-        .dev-card.backend:hover { box-shadow: 0 15px 50px rgba(240, 147, 251, 0.3); border-color: #f5c2fa; }
-
-        .dev-card.assistant { border-color: #4facfe; }
-        .dev-card.assistant:hover { box-shadow: 0 15px 50px rgba(79, 172, 254, 0.3); border-color: #80c2ff; }
-
-        .dev-header {
-            padding: 30px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: rgba(255,255,255,0.03);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: background 0.3s ease;
-        }
-        
-        .dev-card:hover .dev-header {
-            background: rgba(255,255,255,0.07);
-        }
-
-        .dev-photo-large {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255,255,255,0.1);
-            transition: transform 0.4s ease, border-color 0.4s ease;
-        }
-        
-        .dev-card:hover .dev-photo-large {
-            transform: scale(1.1);
-            border-color: rgba(255,255,255,0.3);
-        }
-
-        .dev-header-text h2 {
-            font-size: 28px;
-            color: #fff;
-            margin-bottom: 5px;
-        }
-
-        .dev-header-text .role-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.3s ease;
-        }
-        
-        .dev-card:hover .role-badge {
-            transform: translateX(5px);
-        }
-
-        /* Badge Colors */
+        .dev-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.6); z-index: 2; }
+        .dev-card.lead-dev { border-color: #667eea; } .dev-card.lead-dev:hover { box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3); border-color: #889df5; }
+        .dev-card.frontend { border-color: #764ba2; } .dev-card.frontend:hover { box-shadow: 0 15px 50px rgba(118, 75, 162, 0.3); border-color: #996ccf; }
+        .dev-card.backend { border-color: #f093fb; } .dev-card.backend:hover { box-shadow: 0 15px 50px rgba(240, 147, 251, 0.3); border-color: #f5c2fa; }
+        .dev-card.assistant { border-color: #4facfe; } .dev-card.assistant:hover { box-shadow: 0 15px 50px rgba(79, 172, 254, 0.3); border-color: #80c2ff; }
+        .dev-header { padding: 30px; display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.1); transition: background 0.3s ease; }
+        .dev-card:hover .dev-header { background: rgba(255,255,255,0.07); }
+        .dev-photo-large { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.1); transition: transform 0.4s ease, border-color 0.4s ease; }
+        .dev-card:hover .dev-photo-large { transform: scale(1.1); border-color: rgba(255,255,255,0.3); }
+        .dev-header-text h2 { font-size: 28px; color: #fff; margin-bottom: 5px; }
+        .dev-header-text .role-badge { display: inline-block; padding: 5px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s ease; }
+        .dev-card:hover .role-badge { transform: translateX(5px); }
         .badge-lead { background: rgba(102, 126, 234, 0.2); color: #a3b1f0; border: 1px solid #667eea; }
         .badge-front { background: rgba(118, 75, 162, 0.2); color: #cdb4eb; border: 1px solid #764ba2; }
         .badge-back { background: rgba(240, 147, 251, 0.2); color: #fbcffb; border: 1px solid #f093fb; }
         .badge-assist { background: rgba(79, 172, 254, 0.2); color: #addeff; border: 1px solid #4facfe; }
-
-        .dev-body {
-            padding: 30px;
-            flex-grow: 1;
-        }
-
-        .dev-body h3 {
-            color: #888;
-            font-size: 16px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .contribution-list {
-            list-style: none;
-        }
-
-        .contribution-list li {
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-            line-height: 1.5;
-            color: #ddd;
-            font-size: 16px;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-        
-        .dev-card:hover .contribution-list li {
-            transform: translateX(5px);
-            color: #fff;
-        }
-
-        .contribution-list li::before {
-            content: "➜";
-            position: absolute;
-            left: 0;
-            color: #ffd700;
-            transition: transform 0.3s ease;
-        }
-        
-        .dev-card:hover .contribution-list li::before {
-            transform: scale(1.2);
-        }
+        .dev-body { padding: 30px; flex-grow: 1; }
+        .dev-body h3 { color: #888; font-size: 16px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+        .contribution-list { list-style: none; }
+        .contribution-list li { margin-bottom: 12px; padding-left: 25px; position: relative; line-height: 1.5; color: #ddd; font-size: 16px; transition: transform 0.3s ease, color 0.3s ease; }
+        .dev-card:hover .contribution-list li { transform: translateX(5px); color: #fff; }
+        .contribution-list li::before { content: "➜"; position: absolute; left: 0; color: #ffd700; transition: transform 0.3s ease; }
+        .dev-card:hover .contribution-list li::before { transform: scale(1.2); }
 
         /* Media Queries */
         @media (max-width: 768px) {
             .header h1 { font-size: 48px; }
             .header p { font-size: 24px; }
-            
-            .developers-section {
-                position: static;
-                margin-top: 20px;
-                display: flex;
-                justify-content: center;
-            }
-            
+            .top-controls { position: static; margin-top: 20px; justify-content: center; }
             .tiles-grid, .dev-grid { grid-template-columns: 1fr; }
-            
             .dev-header { flex-direction: column; text-align: center; }
+            .history-table th, .history-table td { padding: 10px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
     <!-- MAIN DASHBOARD SECTION -->
-    <!-- Added class "section-visible" initially so animations play on load -->
     <div id="mainDashboard" class="container section-visible">
         <div class="header">
             <h1>Excellence Engine</h1>
             <p>Boost Your Learning Journey</p>
-            <div class="developers-section">
-                <button class="developers-button" onclick="showDevelopersPage()" title="Ctrl + Shift + M">
+            
+            <div class="top-controls">
+                <!-- Meet Developers Button -->
+                <button class="icon-btn" onclick="showDevelopersPage()" title="Ctrl + Shift + M">
                     <span>👨‍💻</span>
-                    <span class="developer-label">Meet Our Developers</span>
+                    <span class="btn-label">Developers</span>
+                </button>
+                <!-- History Button -->
+                <button class="icon-btn history-btn" onclick="showHistoryPage()" title="Ctrl + H">
+                    <span>📜</span>
+                    <span class="btn-label">History Log</span>
                 </button>
             </div>
         </div>
@@ -632,6 +505,38 @@
         </div>
     </div>
 
+    <!-- HISTORY LOG PAGE -->
+    <div id="historyPage" style="display: none;">
+        <div class="container">
+            <div class="header animate-enter">
+                <h1>Usage History</h1>
+                <p>Track your App and Data Sheet Usage</p>
+                <div style="display: flex; justify-content: center; gap: 10px;">
+                    <button onclick="showMainDashboard()" class="nav-btn" title="Ctrl + B">← Back to Dashboard</button>
+                    <button onclick="clearHistory()" class="nav-btn danger">Clear History</button>
+                </div>
+            </div>
+
+            <div class="history-container animate-enter">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Time / Date</th>
+                            <th>Activity Name</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- JavaScript will populate this -->
+                    </tbody>
+                </table>
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    No history found. Start using the apps to generate logs.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ELABORATE DEVELOPERS PAGE -->
     <div id="developersPage" style="display: none;">
         <div class="container">
@@ -642,120 +547,49 @@
             </div>
 
             <div class="dev-grid">
-                <!-- Developer 1 -->
+                <!-- Developer Cards (Same as original) -->
                 <div class="dev-card lead-dev">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/667eea/ffffff?text=TL" alt="Tharish L" class="dev-photo-large">
-                        <div class="dev-header-text">
-                            <h2>Tharish L</h2>
-                            <span class="role-badge badge-lead">Lead Developer</span>
-                        </div>
+                        <div class="dev-header-text"><h2>Tharish L</h2><span class="role-badge badge-lead">Lead Developer</span></div>
                     </div>
-                    <div class="dev-body">
-                        <h3>Core Contributions</h3>
-                        <ul class="contribution-list">
-                            <li>Conceptualized the overarching architecture of the Excellence Engine.</li>
-                            <li>Led the project management and coordinate between design and logic teams.</li>
-                            <li>Developed the core navigation algorithms and modular grid system.</li>
-                        </ul>
-                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Conceptualized the overarching architecture.</li><li>Led project management.</li></ul></div>
                 </div>
-
-                <!-- Developer 2 -->
                 <div class="dev-card frontend">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/764ba2/ffffff?text=MJ" alt="Monisha JS" class="dev-photo-large">
-                        <div class="dev-header-text">
-                            <h2>Monisha JS</h2>
-                            <span class="role-badge badge-front">Frontend Developer</span>
-                        </div>
+                        <div class="dev-header-text"><h2>Monisha JS</h2><span class="role-badge badge-front">Frontend Developer</span></div>
                     </div>
-                    <div class="dev-body">
-                        <h3>Core Contributions</h3>
-                        <ul class="contribution-list">
-                            <li>Designed the responsive UI and dark-mode aesthetics.</li>
-                            <li>Implemented CSS animations and interactive tile behaviors.</li>
-                            <li>Ensured cross-browser compatibility and mobile responsiveness.</li>
-                        </ul>
-                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Designed responsive UI.</li><li>Implemented animations.</li></ul></div>
                 </div>
-
-                <!-- Developer 3 -->
                 <div class="dev-card backend">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/f093fb/ffffff?text=MN" alt="Mayurarajan NS" class="dev-photo-large">
-                        <div class="dev-header-text">
-                            <h2>Mayurarajan NS</h2>
-                            <span class="role-badge badge-back">Backend Developer</span>
-                        </div>
+                        <div class="dev-header-text"><h2>Mayurarajan NS</h2><span class="role-badge badge-back">Backend Developer</span></div>
                     </div>
-                    <div class="dev-body">
-                        <h3>Core Contributions</h3>
-                        <ul class="contribution-list">
-                            <li>Managed database integrations for Teacher Data Capture sheets.</li>
-                            <li>Optimized script execution for external link handling.</li>
-                            <li>Structured server-side logic for dynamic content delivery.</li>
-                        </ul>
-                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Managed database integrations.</li><li>Optimized scripts.</li></ul></div>
                 </div>
-
-                <!-- Developer 4 -->
                 <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/4facfe/ffffff?text=VN" alt="Vishvesh NI" class="dev-photo-large">
-                        <div class="dev-header-text">
-                            <h2>Vishvesh NI</h2>
-                            <span class="role-badge badge-assist">Assistant Developer</span>
-                        </div>
+                        <div class="dev-header-text"><h2>Vishvesh NI</h2><span class="role-badge badge-assist">Assistant Developer</span></div>
                     </div>
-                    <div class="dev-body">
-                        <h3>Core Contributions</h3>
-                        <ul class="contribution-list">
-                            <li>Assisted in debugging and QA testing across multiple devices.</li>
-                            <li>Maintained documentation and code readability standards.</li>
-                            <li>Contributed to feature expansion and module updates.</li>
-                        </ul>
-                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>QA Testing and Debugging.</li><li>Documentation.</li></ul></div>
                 </div>
-
-                <!-- Developer 5 -->
-                <div class="dev-card assistant">
+                 <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/4facfe/ffffff?text=A" alt="Anand" class="dev-photo-large">
-                        <div class="dev-header-text">
-                            <h2>Anand</h2>
-                            <span class="role-badge badge-assist">Assistant Developer</span>
-                        </div>
+                        <div class="dev-header-text"><h2>Anand</h2><span class="role-badge badge-assist">Assistant Developer</span></div>
                     </div>
-                    <div class="dev-body">
-                        <h3>Core Contributions</h3>
-                        <ul class="contribution-list">
-                            <li>Provided critical support during the deployment phase.</li>
-                            <li>Collaborated on visual asset selection and optimization.</li>
-                            <li>Refined user interaction flows for better accessibility.</li>
-                        </ul>
-                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Support during deployment.</li><li>User interaction flows.</li></ul></div>
                 </div>
-
-                 <!-- Developer 6 -->
                  <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/f093fb/ffffff?text=GG" alt="Gaurav Gadin" class="dev-photo-large">
-                        <div class="dev-header-text">
-                            <h2>Gaurav Gadin</h2>
-                            <span class="role-badge badge-assist">Assistant Developer</span>
-                        </div>
+                        <div class="dev-header-text"><h2>Gaurav Gadin</h2><span class="role-badge badge-assist">Assistant Developer</span></div>
                     </div>
-                    <div class="dev-body">
-                        <h3>Core Contributions</h3>
-                        <ul class="contribution-list">
-                            <li>Helped integrate third-party tools like Zoko AI.</li>
-                            <li>Assisted in styling the specialized interactive tiles.</li>
-                            <li>Conducted user testing sessions for feedback loops.</li>
-                        </ul>
-                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Third-party integrations.</li><li>User testing feedback.</li></ul></div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -765,7 +599,8 @@
         const sections = {
             dashboard: document.getElementById('mainDashboard'),
             dataCapture: document.getElementById('dataCaptureSection'),
-            developers: document.getElementById('developersPage')
+            developers: document.getElementById('developersPage'),
+            history: document.getElementById('historyPage')
         };
 
         function hideAll() {
@@ -779,161 +614,194 @@
             hideAll();
             const target = sections[sectionId];
             target.style.display = 'block';
+            // Trigger reflow to restart animation
             void target.offsetWidth; 
             target.classList.add('section-visible');
             window.scrollTo(0, 0);
         }
 
-        function showMainDashboard() {
-            switchSection('dashboard');
+        function showMainDashboard() { switchSection('dashboard'); }
+        function showDataCapture() { switchSection('dataCapture'); }
+        function showDevelopersPage() { switchSection('developers'); }
+        function showHistoryPage() { 
+            renderHistory();
+            switchSection('history'); 
         }
 
-        function showDataCapture() {
-            switchSection('dataCapture');
+        // --- HISTORY TRACKING LOGIC ---
+
+        // Function to save usage to LocalStorage
+        function logUsage(appName, type) {
+            const now = new Date();
+            const timestamp = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+            
+            const newEntry = {
+                app: appName,
+                type: type, // 'App Usage' or 'Data Entry'
+                time: timestamp
+            };
+
+            // Get existing history or empty array
+            let history = JSON.parse(localStorage.getItem('excellenceHistory') || '[]');
+            
+            // Add new entry to start of array
+            history.unshift(newEntry);
+            
+            // Save back to storage
+            localStorage.setItem('excellenceHistory', JSON.stringify(history));
         }
 
-        function showDevelopersPage() {
-            switchSection('developers');
+        // Function to render table
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('excellenceHistory') || '[]');
+            const tbody = document.getElementById('historyTableBody');
+            const emptyState = document.getElementById('emptyState');
+            
+            tbody.innerHTML = '';
+
+            if (history.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+
+            history.forEach(entry => {
+                const tr = document.createElement('tr');
+                
+                // Badge Class based on type
+                const badgeClass = entry.type === 'App Usage' ? 'badge-tool' : 'badge-data';
+                
+                tr.innerHTML = `
+                    <td style="color: #888;">${entry.time}</td>
+                    <td style="color: #fff; font-weight: bold;">${entry.app}</td>
+                    <td><span class="badge ${badgeClass}">${entry.type}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
-        // --- KEYBOARD SHORTCUT LOGIC ---
+        function clearHistory() {
+            if(confirm("Are you sure you want to clear the usage log?")) {
+                localStorage.removeItem('excellenceHistory');
+                renderHistory();
+            }
+        }
+
+        // --- AUTO-ATTACH EVENT LISTENERS ---
+        // This script runs on load, finds all tiles, and attaches the logger
+        document.addEventListener("DOMContentLoaded", function() {
+            const dashboardTiles = document.querySelectorAll('#mainDashboard .tile');
+            const dataTiles = document.querySelectorAll('#dataCaptureSection .tile');
+
+            // Attach to Dashboard Apps
+            dashboardTiles.forEach(tile => {
+                // We keep existing onclick but add logging
+                tile.addEventListener('click', function() {
+                    const title = this.querySelector('.tile-title').innerText;
+                    // Don't log "Data Capture" navigation tile, only actual apps
+                    if(!title.includes("Data Capture")) {
+                        logUsage(title, 'App Usage');
+                    }
+                });
+            });
+
+            // Attach to Data Capture Sheets
+            dataTiles.forEach(tile => {
+                tile.addEventListener('click', function() {
+                    const title = this.querySelector('.tile-title').innerText;
+                    logUsage(title, 'Data Entry');
+                });
+            });
+        });
+
+        // --- KEYBOARD SHORTCUT LOGIC (UPDATED WITH LOGGING) ---
         
-        // Helper function to safely open links or run alerts
-        function executeAction(dashboardUrl, captureUrl, isAlert = false, alertMsg = "") {
+        function executeAction(dashboardUrl, captureUrl, isAlert = false, alertMsg = "", appName = "") {
             if (sections.dashboard.style.display !== 'none' && dashboardUrl) {
+                // Log Usage
+                logUsage(appName, 'App Usage');
+                
                 if(isAlert) { console.log(alertMsg); alert(alertMsg); }
                 else { window.open(dashboardUrl, '_blank'); }
             } else if (sections.dataCapture.style.display !== 'none' && captureUrl) {
+                // Log Usage
+                logUsage(appName, 'Data Entry');
+                
                 if(isAlert) { console.log(alertMsg); alert(alertMsg); }
                 else { window.open(captureUrl, '_blank'); }
             }
         }
 
         document.addEventListener('keydown', function(e) {
-            // Common Navigation Shortcuts
+            // Navigation Shortcuts
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') { e.preventDefault(); showDataCapture(); return; }
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'm') { e.preventDefault(); showDevelopersPage(); return; }
+            if (e.ctrlKey && e.key.toLowerCase() === 'b') { e.preventDefault(); showMainDashboard(); return; }
             
-            // Ctrl + Shift + D = Teacher Data Capture
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') {
-                e.preventDefault();
-                showDataCapture();
-                return;
-            }
+            // New Shortcut for History: Ctrl + H
+            if (e.ctrlKey && e.key.toLowerCase() === 'h') { e.preventDefault(); showHistoryPage(); return; }
 
-            // Ctrl + Shift + M = Meet Developers
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'm') {
-                e.preventDefault();
-                showDevelopersPage();
-                return;
-            }
-
-            // Ctrl + B = Back to Dashboard
-            if (e.ctrlKey && e.key.toLowerCase() === 'b') {
-                e.preventDefault();
-                showMainDashboard();
-                return;
-            }
-
-            // --- Content Shortcuts (Context Sensitive) ---
-
-            // Ctrl + R = Recent Notifications
+            // Content Shortcuts
             if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'r') {
-                e.preventDefault(); // Stop browser refresh
+                e.preventDefault();
+                // Manually handle Recent Notifications logging since it's special (alert based)
                 if (sections.dashboard.style.display !== 'none') {
-                    console.log('Link to Recent Notifications page'); 
+                    logUsage('Recent Notifications', 'App Usage');
                     alert('Link to Recent Notifications page');
                 } else if (sections.dataCapture.style.display !== 'none') {
-                    console.log('Link to Recent Notifications data entry sheet'); 
+                    logUsage('Recent Notifications', 'Data Entry');
                     alert('Link to Recent Notifications data entry sheet');
                 }
                 return;
             }
 
-            // Ctrl + S = Sight Words
             if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 's') {
-                e.preventDefault(); // Stop browser save
-                executeAction(
-                    'https://tinyurl.com/CCCEEEwordcraft', 
-                    'https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing'
-                );
+                e.preventDefault();
+                executeAction('https://tinyurl.com/CCCEEEwordcraft', 'https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing', false, "", "Sight Words");
                 return;
             }
-
-            // Ctrl + Alt + W = Word of the Day
             if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'w') {
                 e.preventDefault();
-                executeAction(
-                    'https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec', 
-                    'https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing'
-                );
+                executeAction('https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec', 'https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing', false, "", "Word of the Day");
                 return;
             }
-
-            // Ctrl + I = Idioms
             if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'i') {
                 e.preventDefault();
-                executeAction(
-                    'https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec', 
-                    'https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing'
-                );
+                executeAction('https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec', 'https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing', false, "", "Idioms");
                 return;
             }
-
-            // Ctrl + Shift + S = Situation
             if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 's') {
                 e.preventDefault();
-                executeAction(
-                    'https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec', 
-                    'https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing'
-                );
+                executeAction('https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec', 'https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing', false, "", "Situation");
                 return;
             }
-
-            // Ctrl + M = Mental Math
             if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'm') {
                 e.preventDefault();
-                executeAction(
-                    'https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec', 
-                    'https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing'
-                );
+                executeAction('https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec', 'https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing', false, "", "Mental Math");
                 return;
             }
-
-            // Ctrl + Q = Quiz
             if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'q') {
                 e.preventDefault();
-                executeAction(
-                    'https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec', 
-                    'https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing'
-                );
+                executeAction('https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec', 'https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing', false, "", "Quiz");
                 return;
             }
-
-            // Ctrl + Z = Zoko AI (Only on Dashboard)
             if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'z') {
-                e.preventDefault(); // Undo is default
+                e.preventDefault();
                 if (sections.dashboard.style.display !== 'none') {
+                    logUsage("Zoko AI", "App Usage");
                     window.open('https://tinyurl.com/zoko-ai-assistant', '_blank');
                 }
                 return;
             }
-
-            // Ctrl + Shift + I = Interactive Activities
             if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
-                e.preventDefault(); // Usually opens dev tools
-                executeAction(
-                    'https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec', 
-                    'https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing'
-                );
+                e.preventDefault();
+                executeAction('https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec', 'https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing', false, "", "Interactive Activities");
                 return;
             }
-
-            // Ctrl + Shift + R = Riddles
             if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'r') {
-                e.preventDefault(); // Usually hard reload
-                executeAction(
-                    'https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec', 
-                    'https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing'
-                );
+                e.preventDefault();
+                executeAction('https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec', 'https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing', false, "", "Riddles");
                 return;
             }
         });
