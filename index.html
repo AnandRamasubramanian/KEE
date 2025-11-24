@@ -1,21 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excellence Engine</title>
+    
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* --- Reset & Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Inter', sans-serif;
             background: #050505;
@@ -23,6 +21,7 @@
             min-height: 100vh;
             padding: 40px 20px;
             overflow-x: hidden;
+            text-rendering: optimizeLegibility;
         }
 
         .container {
@@ -30,28 +29,13 @@
             margin: 0 auto;
         }
 
-        /* --- Animation Keyframes --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        a { text-decoration: none; }
 
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .animate-enter {
-            animation: popIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        /* --- Header Styles --- */
+        /* --- Header --- */
         .header {
             text-align: center;
             margin-bottom: 60px;
             position: relative;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         .header h1 {
@@ -60,12 +44,6 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-            transition: text-shadow 0.3s ease;
-        }
-        
-        .header h1:hover {
-            text-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
         }
 
         .header p {
@@ -73,60 +51,33 @@
             color: #aaa;
         }
 
-        /* --- Top Right Buttons Container --- */
+        /* --- Controls --- */
         .top-controls {
             position: absolute;
             top: 0;
             right: 0;
-            display: flex;
-            gap: 15px;
-            flex-direction: row-reverse;
         }
 
-        /* Developer Button */
         .icon-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: 3px solid #667eea;
             border-radius: 30px;
             padding: 10px 20px;
             color: #fff;
-            font-size: 28px;
+            font-size: 18px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
-            width: 60px;
             height: 60px;
-            overflow: hidden;
-            white-space: nowrap;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
-            text-decoration: none;
-            z-index: 10;
         }
 
         .icon-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            width: auto;
-            padding-right: 25px;
+            background: linear-gradient(135deg, #5a6fd1 0%, #66418c 100%);
             border-color: #fff;
         }
 
-        .btn-label {
-            font-size: 18px;
-            opacity: 0;
-            transition: opacity 0.3s ease 0.1s;
-            max-width: 0;
-            overflow: hidden;
-        }
-
-        .icon-btn:hover .btn-label {
-            opacity: 1;
-            max-width: 200px;
-        }
-
-        /* --- Navigation Buttons --- */
         .nav-btn {
             background: #ffd700;
             color: #000;
@@ -137,16 +88,13 @@
             cursor: pointer;
             margin-top: 20px;
             font-weight: bold;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        .nav-btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            background: #ffed4a;
-            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.4);
         }
 
-        /* --- Tile Grid Styles --- */
+        .nav-btn:hover {
+            background: #ffed4a;
+        }
+
+        /* --- Grid Layouts --- */
         .tiles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -154,199 +102,217 @@
             padding: 20px;
         }
 
+        /* --- Tile Components --- */
         .tile {
-            background: linear-gradient(145deg, #1a1a1a 0%, #252525 100%);
+            background: #1a1a1a;
             border: 4px solid #444;
             border-radius: 20px;
-            padding: 50px 30px;
+            padding: 40px 30px;
             text-align: center;
             cursor: pointer;
-            text-decoration: none;
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 280px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.3s ease, background 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
+            min-height: 250px;
         }
-
-        .tile::after {
-            content: attr(data-key);
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(255, 215, 0, 0.15);
-            color: #ffd700;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            letter-spacing: 1px;
-        }
-
-        .tile:hover::after { opacity: 1; transform: translateY(0); }
-
-        .section-visible .tile { animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        
-        /* Staggered Delays */
-        .section-visible .tile:nth-child(1) { animation-delay: 0.05s; }
-        .section-visible .tile:nth-child(2) { animation-delay: 0.1s; }
-        .section-visible .tile:nth-child(3) { animation-delay: 0.15s; }
-        .section-visible .tile:nth-child(4) { animation-delay: 0.2s; }
-        .section-visible .tile:nth-child(5) { animation-delay: 0.25s; }
-        .section-visible .tile:nth-child(6) { animation-delay: 0.3s; }
-        .section-visible .tile:nth-child(7) { animation-delay: 0.35s; }
-        .section-visible .tile:nth-child(8) { animation-delay: 0.4s; }
-        .section-visible .tile:nth-child(9) { animation-delay: 0.45s; }
-        .section-visible .tile:nth-child(10) { animation-delay: 0.5s; }
-        .section-visible .tile:nth-child(11) { animation-delay: 0.55s; }
 
         .tile:hover {
-            transform: translateY(-12px) scale(1.02);
-            background: linear-gradient(145deg, #202020 0%, #303030 100%);
-            z-index: 2;
+            background: #252525;
+            border-color: #fff;
         }
-        .tile:active { transform: scale(0.98); }
-        .tile-icon { font-size: 64px; margin-bottom: 20px; transition: transform 0.4s ease; }
-        .tile:hover .tile-icon { transform: scale(1.2) rotate(5deg); }
-        .tile-title { font-size: 40px; font-weight: bold; margin-bottom: 15px; color: #ffd700; transition: color 0.3s ease; }
-        .tile-description { font-size: 24px; color: #bbb; line-height: 1.4; transition: color 0.3s ease; }
+
+        .tile-icon { font-size: 64px; margin-bottom: 20px; }
+        .tile-icon img { width: 64px; height: 64px; object-fit: contain; }
+        
+        .tile-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        
+        .tile-description {
+            font-size: 20px;
+            color: #bbb;
+            line-height: 1.4;
+        }
+        
         .tile:hover .tile-description { color: #fff; }
 
-        /* Tile Colors */
-        .tile:nth-child(1) { border-color: #ff6b6b; } .tile:nth-child(1):hover { box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4); } .tile:nth-child(1) .tile-title { color: #ff6b6b; }
-        .tile:nth-child(2) { border-color: #4ecdc4; } .tile:nth-child(2):hover { box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4); } .tile:nth-child(2) .tile-title { color: #4ecdc4; }
-        .tile:nth-child(3) { border-color: #95e1d3; } .tile:nth-child(3):hover { box-shadow: 0 15px 40px rgba(149, 225, 211, 0.4); } .tile:nth-child(3) .tile-title { color: #95e1d3; }
-        .tile:nth-child(4) { border-color: #f38181; } .tile:nth-child(4):hover { box-shadow: 0 15px 40px rgba(243, 129, 129, 0.4); } .tile:nth-child(4) .tile-title { color: #f38181; }
-        .tile:nth-child(5) { border-color: #aa96da; } .tile:nth-child(5):hover { box-shadow: 0 15px 40px rgba(170, 150, 218, 0.4); } .tile:nth-child(5) .tile-title { color: #aa96da; }
-        .tile:nth-child(6) { border-color: #fcbad3; } .tile:nth-child(6):hover { box-shadow: 0 15px 40px rgba(252, 186, 211, 0.4); } .tile:nth-child(6) .tile-title { color: #fcbad3; }
-        .tile:nth-child(7) { border-color: #ffd700; } .tile:nth-child(7):hover { box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4); }
-        .tile:nth-child(8) { border-color: #51cf66; } .tile:nth-child(8):hover { box-shadow: 0 15px 40px rgba(81, 207, 102, 0.4); } .tile:nth-child(8) .tile-title { color: #51cf66; }
-        .tile:nth-child(9) { border-color: #4d94ff; } .tile:nth-child(9):hover { box-shadow: 0 15px 40px rgba(77, 148, 255, 0.4); } .tile:nth-child(9) .tile-title { color: #4d94ff; }
-        .tile-icon img { width: 64px; height: 64px; object-fit: contain; transition: transform 0.4s ease; }
-        .tile:nth-child(10) { border-color: #ff9800; } .tile:nth-child(10):hover { box-shadow: 0 15px 40px rgba(255, 152, 0, 0.5); } .tile:nth-child(10) .tile-title { color: #ff9800; }
-        .tile:nth-child(11) { border-color: #9370DB; } .tile:nth-child(11):hover { box-shadow: 0 15px 40px rgba(147, 112, 219, 0.5); } .tile:nth-child(11) .tile-title { color: #9370DB; }
+        /* Specific Tile Borders */
+        .tile:nth-child(1) { border-color: #ff6b6b; } 
+        .tile:nth-child(1) .tile-title { color: #ff6b6b; }
+        
+        .tile:nth-child(2) { border-color: #4ecdc4; }
+        .tile:nth-child(2) .tile-title { color: #4ecdc4; }
+        
+        .tile:nth-child(3) { border-color: #95e1d3; }
+        .tile:nth-child(3) .tile-title { color: #95e1d3; }
+        
+        .tile:nth-child(4) { border-color: #f38181; }
+        .tile:nth-child(4) .tile-title { color: #f38181; }
+        
+        .tile:nth-child(5) { border-color: #aa96da; }
+        .tile:nth-child(5) .tile-title { color: #aa96da; }
+        
+        .tile:nth-child(6) { border-color: #fcbad3; }
+        .tile:nth-child(6) .tile-title { color: #fcbad3; }
+        
+        .tile:nth-child(7) { border-color: #ffd700; }
+        
+        .tile:nth-child(8) { border-color: #51cf66; }
+        .tile:nth-child(8) .tile-title { color: #51cf66; }
+        
+        .tile:nth-child(9) { border-color: #4d94ff; }
+        .tile:nth-child(9) .tile-title { color: #4d94ff; }
+        
+        .tile:nth-child(10) { border-color: #ff9800; }
+        .tile:nth-child(10) .tile-title { color: #ff9800; }
+        
+        .tile:nth-child(11) { border-color: #9370DB; }
+        .tile:nth-child(11) .tile-title { color: #9370DB; }
 
-        /* --- DEVELOPER CARDS STYLES --- */
-        .dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; padding: 40px 0; }
-        .dev-card { background: #1a1a1a; border-radius: 20px; overflow: hidden; position: relative; border: 2px solid #333; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; opacity: 0; transform: translateY(30px); }
-        .section-visible .dev-card { animation: fadeInUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        .section-visible .dev-card:nth-child(1) { animation-delay: 0.1s; }
-        .section-visible .dev-card:nth-child(2) { animation-delay: 0.2s; }
-        .section-visible .dev-card:nth-child(3) { animation-delay: 0.3s; }
-        .section-visible .dev-card:nth-child(4) { animation-delay: 0.4s; }
-        .section-visible .dev-card:nth-child(5) { animation-delay: 0.5s; }
-        .section-visible .dev-card:nth-child(6) { animation-delay: 0.6s; }
-        .section-visible .dev-card:nth-child(7) { animation-delay: 0.7s; }
-        .dev-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.6); z-index: 2; }
-        .dev-card.backend { border-color: #f093fb; } .dev-card.backend:hover { box-shadow: 0 15px 50px rgba(240, 147, 251, 0.3); border-color: #f5c2fa; }
-        .dev-card.assistant { border-color: #4facfe; } .dev-card.assistant:hover { box-shadow: 0 15px 50px rgba(79, 172, 254, 0.3); border-color: #80c2ff; }
-        .dev-header { padding: 30px; display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.1); transition: background 0.3s ease; }
-        .dev-card:hover .dev-header { background: rgba(255,255,255,0.07); }
-        .dev-photo-large { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.1); transition: transform 0.4s ease, border-color 0.4s ease; }
-        .dev-card:hover .dev-photo-large { transform: scale(1.1); border-color: rgba(255,255,255,0.3); }
-        .dev-header-text h2 { font-size: 28px; color: #fff; margin-bottom: 5px; }
-        .dev-header-text .role-badge { display: inline-block; padding: 5px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s ease; }
-        .dev-card:hover .role-badge { transform: translateX(5px); }
+        /* --- Developer Cards --- */
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        .dev-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dev-card:hover { border-color: #fff; background: #222; }
+
+        .dev-card.backend { border-color: #f093fb; }
+        .dev-card.assistant { border-color: #4facfe; }
+
+        .dev-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dev-photo-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .dev-header-text h2 { font-size: 24px; color: #fff; margin-bottom: 5px; }
+        
+        .role-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
         .badge-back { background: rgba(240, 147, 251, 0.2); color: #fbcffb; border: 1px solid #f093fb; }
         .badge-assist { background: rgba(79, 172, 254, 0.2); color: #addeff; border: 1px solid #4facfe; }
-        .dev-body { padding: 30px; flex-grow: 1; }
-        .dev-body h3 { color: #888; font-size: 16px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
-        .contribution-list { list-style: none; }
-        .contribution-list li { margin-bottom: 12px; padding-left: 25px; position: relative; line-height: 1.5; color: #ddd; font-size: 16px; transition: transform 0.3s ease, color 0.3s ease; }
-        .dev-card:hover .contribution-list li { transform: translateX(5px); color: #fff; }
-        .contribution-list li::before { content: "➜"; position: absolute; left: 0; color: #ffd700; transition: transform 0.3s ease; }
-        .dev-card:hover .contribution-list li::before { transform: scale(1.2); }
 
-        /* Media Queries */
+        .dev-body { padding: 25px; flex-grow: 1; }
+        .dev-body h3 { color: #888; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; }
+        
+        .contribution-list { list-style: none; }
+        .contribution-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #ddd; }
+        .contribution-list li::before { content: "➜"; position: absolute; left: 0; color: #ffd700; }
+
+        /* --- Media Queries --- */
         @media (max-width: 768px) {
-            .header h1 { font-size: 48px; }
-            .header p { font-size: 24px; }
-            .top-controls { position: static; margin-top: 20px; justify-content: center; }
+            .header h1 { font-size: 42px; }
+            .header p { font-size: 20px; }
+            .top-controls { position: static; margin-top: 20px; justify-content: center; display: flex; }
             .tiles-grid, .dev-grid { grid-template-columns: 1fr; }
             .dev-header { flex-direction: column; text-align: center; }
+            body { padding: 20px 10px; }
         }
     </style>
 </head>
 <body>
 
     <!-- MAIN DASHBOARD SECTION -->
-    <div id="mainDashboard" class="container section-visible">
+    <div id="mainDashboard" class="container">
         <div class="header">
             <h1>Excellence Engine</h1>
             <p>Boost Your Learning Journey</p>
             
             <div class="top-controls">
-                <!-- Meet Developers Button -->
-                <button class="icon-btn" onclick="showDevelopersPage()" title="Ctrl + Shift + M">
+                <button class="icon-btn" onclick="showDevelopersPage()">
                     <span>👨‍💻</span>
-                    <span class="btn-label">Developers</span>
+                    <span>Developers</span>
                 </button>
             </div>
         </div>
 
         <div class="tiles-grid">
-            <a href="#" class="tile" data-key="Ctrl + R" data-app="Recent Notifications" data-type="App Usage" onclick="alert('Link to Recent Notifications page'); return false;">
+            <a href="#" class="tile" onclick="alert('Link to Recent Notifications page'); return false;">
                 <div class="tile-icon">🔔</div>
                 <div class="tile-title">Recent Notifications</div>
                 <div class="tile-description">Stay updated with latest announcements</div>
             </a>
-            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" data-key="Ctrl + S" data-app="Sight Words" data-type="App Usage" target="_blank">
+            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" target="_blank">
                 <div class="tile-icon">👁️</div>
                 <div class="tile-title">Sight Words</div>
                 <div class="tile-description">Master high-frequency words</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" data-key="Ctrl + Alt + W" data-app="Word of the Day" data-type="App Usage" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" target="_blank">
                 <div class="tile-icon">📖</div>
                 <div class="tile-title">Word of the Day</div>
                 <div class="tile-description">Expand your vocabulary daily</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" data-key="Ctrl + I" data-app="Idioms" data-type="App Usage" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" target="_blank">
                 <div class="tile-icon">💬</div>
                 <div class="tile-title">Idioms</div>
                 <div class="tile-description">Learn expressions and phrases</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" data-key="Ctrl + Shift + S" data-app="Situation" data-type="App Usage" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Situation</div>
                 <div class="tile-description">Real-life scenarios and solutions</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" data-key="Ctrl + M" data-app="Mental Math" data-type="App Usage" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" target="_blank">
                 <div class="tile-icon">🧮</div>
                 <div class="tile-title">Mental Math</div>
                 <div class="tile-description">Quick calculation challenges</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" data-key="Ctrl + Q" data-app="Quiz" data-type="App Usage" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" target="_blank">
                 <div class="tile-icon">🎯</div>
                 <div class="tile-title">Quiz</div>
                 <div class="tile-description">Test your knowledge</div>
             </a>
-            <a href="#" class="tile" data-key="Ctrl + Shift + D" onclick="showDataCapture(); return false;">
+            <a href="#" class="tile" onclick="showDataCapture(); return false;">
                 <div class="tile-icon">📊</div>
                 <div class="tile-title">Teacher Data Capture Sheet</div>
                 <div class="tile-description">Google sheet links to enter the data</div>
             </a>
-            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" data-key="Ctrl + Z" data-app="Zoko AI" data-type="App Usage" target="_blank">
-                <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo"></div>
+            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" target="_blank">
+                <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo" loading="lazy"></div>
                 <div class="tile-title">Zoko AI</div>
                 <div class="tile-description">Your AI-powered assistant</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" data-key="Ctrl + Shift + I" data-app="Interactive Activities" data-type="App Usage" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Interactive Activities</div>
                 <div class="tile-description">Watch; Play; Imagine; Repeat</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" data-key="Ctrl + Shift + R" data-app="Riddles" data-type="App Usage" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" target="_blank">
                 <div class="tile-icon">❓</div>
                 <div class="tile-title">Riddles</div>
                 <div class="tile-description">Challenge your mind with puzzles</div>
@@ -357,53 +323,53 @@
     <!-- DATA CAPTURE SECTION -->
     <div id="dataCaptureSection" style="display: none;">
         <div class="container">
-            <div class="header animate-enter">
+            <div class="header">
                 <h1>Teacher Data Capture Sheet</h1>
                 <p>Select an activity to enter data</p>
-                <button onclick="showMainDashboard()" class="nav-btn" title="Ctrl + B">← Back to Dashboard</button>
+                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
             </div>
             <div class="tiles-grid">
-                <a href="#" class="tile" data-key="Ctrl + R" data-app="Recent Notifications" data-type="Data Entry" onclick="alert('Link to Recent Notifications data entry sheet'); return false;">
+                <a href="#" class="tile" onclick="alert('Link to Recent Notifications data entry sheet'); return false;">
                     <div class="tile-icon">🔔</div>
                     <div class="tile-title">Recent Notifications</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" data-key="Ctrl + S" data-app="Sight Words" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">👁️</div>
                     <div class="tile-title">Sight Words</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" data-key="Ctrl + Alt + W" data-app="Word of the Day" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">📖</div>
                     <div class="tile-title">Word of the Day</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" data-key="Ctrl + I" data-app="Idioms" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">💬</div>
                     <div class="tile-title">Idioms</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + S" data-app="Situation" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Situation</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" data-key="Ctrl + M" data-app="Mental Math" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🧮</div>
                     <div class="tile-title">Mental Math</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" data-key="Ctrl + Q" data-app="Quiz" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎯</div>
                     <div class="tile-title">Quiz</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + I" data-app="Interactive Activities" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Interactive Activities</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + R" data-app="Riddles" data-type="Data Entry" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">❓</div>
                     <div class="tile-title">Riddles</div>
                     <div class="tile-description">Click to enter the data</div>
@@ -415,58 +381,58 @@
     <!-- DEVELOPERS PAGE -->
     <div id="developersPage" style="display: none;">
         <div class="container">
-            <div class="header animate-enter">
+            <div class="header">
                 <h1>Meet the Minds</h1>
                 <p>The Architects of Excellence Engine</p>
-                <button onclick="showMainDashboard()" class="nav-btn" title="Ctrl + B">← Back to Dashboard</button>
+                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
             </div>
 
             <div class="dev-grid">
                 <div class="dev-card backend">
                     <div class="dev-header">
-                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SE" alt="Smt. Elavarisi" class="dev-photo-large">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SE" alt="Smt. Elavarisi" class="dev-photo-large" loading="lazy">
                         <div class="dev-header-text"><h2>Smt. Elavarisi</h2><span class="role-badge badge-back">Principal</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>The root of our inspiration 🌳</li></ul></div>
                 </div>
                 <div class="dev-card backend">
                     <div class="dev-header">
-                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SV" alt="Smt. Vasundhara" class="dev-photo-large">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SV" alt="Smt. Vasundhara" class="dev-photo-large" loading="lazy">
                         <div class="dev-header-text"><h2>Smt. Vasundhara</h2><span class="role-badge badge-back">Vice Principal</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Guiding us with wisdom and heart 💚</li></ul></div>
                 </div>
                 <div class="dev-card backend">
                     <div class="dev-header">
-                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SA" alt="Smt. Aishwarya" class="dev-photo-large">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SA" alt="Smt. Aishwarya" class="dev-photo-large" loading="lazy">
                         <div class="dev-header-text"><h2>Smt. Aishwarya</h2><span class="role-badge badge-back">Project Mentor</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>The branch that supports every leaf 🌿</li></ul></div>
                 </div>
                 <div class="dev-card backend">
                     <div class="dev-header">
-                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=MN" alt="Mayurarajan NS" class="dev-photo-large">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=MN" alt="Mayurarajan NS" class="dev-photo-large" loading="lazy">
                         <div class="dev-header-text"><h2>Mayurarajan NS</h2><span class="role-badge badge-back">Mental Math Developer</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Mental Math Tile</li><li>Created Situation</li></ul></div>
                 </div>
                 <div class="dev-card assistant">
                     <div class="dev-header">
-                        <img src="https://placehold.co/200x200/4facfe/ffffff?text=VN" alt="Vishvesh NI" class="dev-photo-large">
+                        <img src="https://placehold.co/200x200/4facfe/ffffff?text=VN" alt="Vishvesh NI" class="dev-photo-large" loading="lazy">
                         <div class="dev-header-text"><h2>Vishvesh NI</h2><span class="role-badge badge-assist">Vedic Maths Developer</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Vedic Maths</li><li>Planned the work.</li></ul></div>
                 </div>
                 <div class="dev-card assistant">
                     <div class="dev-header">
-                        <img src="https://placehold.co/200x200/4facfe/ffffff?text=A" alt="Anand" class="dev-photo-large">
+                        <img src="https://placehold.co/200x200/4facfe/ffffff?text=A" alt="Anand" class="dev-photo-large" loading="lazy">
                         <div class="dev-header-text"><h2>Anand</h2><span class="role-badge badge-assist">Multi-App Developer</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Built Word of the Day, Idioms, Zoko AI, Riddles</li><li>Dedicated Work</li></ul></div>
                 </div>
                 <div class="dev-card assistant">
                     <div class="dev-header">
-                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=GG" alt="Gaurav Gadin" class="dev-photo-large">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=GG" alt="Gaurav Gadin" class="dev-photo-large" loading="lazy">
                         <div class="dev-header-text"><h2>Gaurav Gadin</h2><span class="role-badge badge-assist">Presenter</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Presented our work to Vikshit Bharat</li><li>Prepared wonderful speech</li></ul></div>
@@ -476,12 +442,7 @@
     </div>
 
     <script>
-        // ===== SUPABASE CONFIGURATION =====
-        // REPLACE THESE WITH YOUR ACTUAL VALUES
-        const SUPABASE_URL = 'https://ijltwzlpdfmluenpyvau.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlqbHR3emxwZGZtbHVlbnB5dmF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM5NjQwOTMsImV4cCI6MjA3OTU0MDA5M30.AlVHxn3vxFcFt7CNsJbilnmVC3j5ChlTVLXkUI2xFLQ';
-
-        // ===== Navigation Logic =====
+        // ===== Simple Navigation Logic =====
         const sections = {
             dashboard: document.getElementById('mainDashboard'),
             dataCapture: document.getElementById('dataCaptureSection'),
@@ -491,127 +452,26 @@
         function hideAll() {
             Object.values(sections).forEach(section => {
                 section.style.display = 'none';
-                section.classList.remove('section-visible');
             });
         }
 
-        function switchSection(sectionId) {
+        function showMainDashboard() {
             hideAll();
-            const target = sections[sectionId];
-            target.style.display = 'block';
-            void target.offsetWidth; 
-            target.classList.add('section-visible');
+            sections.dashboard.style.display = 'block';
             window.scrollTo(0, 0);
         }
 
-        function showMainDashboard() { switchSection('dashboard'); }
-        function showDataCapture() { switchSection('dataCapture'); }
-        function showDevelopersPage() { switchSection('developers'); }
-
-        // ===== SUPABASE LOGGING FUNCTION =====
-        async function logToSupabase(appName, usageType) {
-            try {
-                const deviceInfo = navigator.userAgent;
-                
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/excellence_history`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify({
-                        app_name: appName,
-                        usage_type: usageType,
-                        device_info: deviceInfo
-                    })
-                });
-
-                if (!response.ok) {
-                    console.error('Failed to log usage:', response.statusText);
-                }
-            } catch (error) {
-                console.error('Error logging to Supabase:', error);
-            }
+        function showDataCapture() {
+            hideAll();
+            sections.dataCapture.style.display = 'block';
+            window.scrollTo(0, 0);
         }
 
-        // ===== AUTO-ATTACH EVENT LISTENERS =====
-        document.addEventListener("DOMContentLoaded", function() {
-            const allTiles = document.querySelectorAll('.tile[data-app]');
-
-            allTiles.forEach(tile => {
-                tile.addEventListener('click', function() {
-                    const appName = this.getAttribute('data-app');
-                    const usageType = this.getAttribute('data-type');
-                    
-                    if (appName && usageType) {
-                        logToSupabase(appName, usageType);
-                    }
-                });
-            });
-        });
-
-        // ===== KEYBOARD SHORTCUTS =====
-        document.addEventListener('keydown', function(e) {
-            // Navigation
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') { 
-                e.preventDefault(); showDataCapture(); return; 
-            }
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'm') { 
-                e.preventDefault(); showDevelopersPage(); return; 
-            }
-            if (e.ctrlKey && e.key.toLowerCase() === 'b') { 
-                e.preventDefault(); showMainDashboard(); return; 
-            }
-
-            // App Shortcuts
-            const shortcuts = {
-                'r': { ctrl: true, shift: false, alert: true, msg: 'Recent Notifications', appName: 'Recent Notifications' },
-                's': { ctrl: true, shift: false, url: 'https://tinyurl.com/CCCEEEwordcraft', appName: 'Sight Words' },
-                'w': { ctrl: true, alt: true, url: 'https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec', appName: 'Word of the Day' },
-                'i': { ctrl: true, shift: false, url: 'https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec', appName: 'Idioms' },
-                'm': { ctrl: true, shift: false, url: 'https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec', appName: 'Mental Math' },
-                'q': { ctrl: true, shift: false, url: 'https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec', appName: 'Quiz' },
-                'z': { ctrl: true, shift: false, url: 'https://tinyurl.com/zoko-ai-assistant', appName: 'Zoko AI' }
-            };
-
-            // Handle 'S' for Situation (Ctrl+Shift+S)
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 's') {
-                e.preventDefault();
-                const type = sections.dashboard.style.display !== 'none' ? 'App Usage' : 'Data Entry';
-                const url = sections.dashboard.style.display !== 'none' 
-                    ? 'https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec'
-                    : 'https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing';
-                logToSupabase('Situation', type);
-                window.open(url, '_blank');
-                return;
-            }
-
-            // Handle 'I' for Interactive (Ctrl+Shift+I)
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
-                e.preventDefault();
-                const type = sections.dashboard.style.display !== 'none' ? 'App Usage' : 'Data Entry';
-                const url = sections.dashboard.style.display !== 'none' 
-                    ? 'https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec'
-                    : 'https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing';
-                logToSupabase('Interactive Activities', type);
-                window.open(url, '_blank');
-                return;
-            }
-
-            // Handle 'R' for Riddles (Ctrl+Shift+R)
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'r') {
-                e.preventDefault();
-                const type = sections.dashboard.style.display !== 'none' ? 'App Usage' : 'Data Entry';
-                const url = sections.dashboard.style.display !== 'none' 
-                    ? 'https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec'
-                    : 'https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing';
-                logToSupabase('Riddles', type);
-                window.open(url, '_blank');
-                return;
-            }
-        });
+        function showDevelopersPage() {
+            hideAll();
+            sections.developers.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>
