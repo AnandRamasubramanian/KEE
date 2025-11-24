@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excellence Engine</title>
-    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=QnckGtBOsSO8QfH1kTMgAaLRk2UguTOkTLy0uNQWNEvQCOlyjpTTqe5h_BoOnF4YZkEGbC4ZiFA97lkNRdZnZg" charset="UTF-8"></script>
     <style>
         * {
             margin: 0;
@@ -80,10 +80,10 @@
             right: 0;
             display: flex;
             gap: 15px;
-            flex-direction: row-reverse; /* Align to right */
+            flex-direction: row-reverse;
         }
 
-        /* Developer & History Buttons */
+        /* Developer Button */
         .icon-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: 3px solid #667eea;
@@ -106,22 +106,11 @@
             z-index: 10;
         }
 
-        .icon-btn.history-btn {
-            background: linear-gradient(135deg, #434343 0%, #000000 100%);
-            border-color: #ffd700;
-            color: #ffd700;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
-        }
-
         .icon-btn:hover {
             transform: translateY(-3px) scale(1.05);
             width: auto;
             padding-right: 25px;
             border-color: #fff;
-        }
-        
-        .icon-btn.history-btn:hover {
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
         }
 
         .btn-label {
@@ -155,15 +144,6 @@
             transform: scale(1.05) translateY(-2px);
             background: #ffed4a;
             box-shadow: 0 8px 15px rgba(255, 215, 0, 0.4);
-        }
-        .nav-btn.danger {
-            background: #ff4b4b;
-            color: white;
-            margin-left: 10px;
-        }
-        .nav-btn.danger:hover {
-            background: #ff6b6b;
-            box-shadow: 0 8px 15px rgba(255, 75, 75, 0.4);
         }
 
         /* --- Tile Grid Styles --- */
@@ -230,7 +210,6 @@
         .section-visible .tile:nth-child(9) { animation-delay: 0.45s; }
         .section-visible .tile:nth-child(10) { animation-delay: 0.5s; }
         .section-visible .tile:nth-child(11) { animation-delay: 0.55s; }
-        .section-visible .tile:nth-child(12) { animation-delay: 0.6s; }
 
         .tile:hover {
             transform: translateY(-12px) scale(1.02);
@@ -244,7 +223,7 @@
         .tile-description { font-size: 24px; color: #bbb; line-height: 1.4; transition: color 0.3s ease; }
         .tile:hover .tile-description { color: #fff; }
 
-        /* Tile Colors (Border & Hover) */
+        /* Tile Colors */
         .tile:nth-child(1) { border-color: #ff6b6b; } .tile:nth-child(1):hover { box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4); } .tile:nth-child(1) .tile-title { color: #ff6b6b; }
         .tile:nth-child(2) { border-color: #4ecdc4; } .tile:nth-child(2):hover { box-shadow: 0 15px 40px rgba(78, 205, 196, 0.4); } .tile:nth-child(2) .tile-title { color: #4ecdc4; }
         .tile:nth-child(3) { border-color: #95e1d3; } .tile:nth-child(3):hover { box-shadow: 0 15px 40px rgba(149, 225, 211, 0.4); } .tile:nth-child(3) .tile-title { color: #95e1d3; }
@@ -258,69 +237,6 @@
         .tile:nth-child(10) { border-color: #ff9800; } .tile:nth-child(10):hover { box-shadow: 0 15px 40px rgba(255, 152, 0, 0.5); } .tile:nth-child(10) .tile-title { color: #ff9800; }
         .tile:nth-child(11) { border-color: #9370DB; } .tile:nth-child(11):hover { box-shadow: 0 15px 40px rgba(147, 112, 219, 0.5); } .tile:nth-child(11) .tile-title { color: #9370DB; }
 
-        /* --- HISTORY PAGE STYLES --- */
-        .history-container {
-            background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 30px;
-            overflow-x: auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .history-table {
-            width: 100%;
-            border-collapse: collapse;
-            color: #ddd;
-            font-size: 18px;
-        }
-
-        .history-table th, .history-table td {
-            padding: 15px 20px;
-            text-align: left;
-            border-bottom: 1px solid #333;
-        }
-
-        .history-table th {
-            background: #252525;
-            color: #ffd700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 14px;
-            border-radius: 5px;
-        }
-
-        .history-table tr {
-            transition: background 0.2s ease;
-        }
-
-        .history-table tr:hover {
-            background: rgba(255, 215, 0, 0.05);
-        }
-        
-        .history-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .badge {
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .badge-tool { background: rgba(102, 126, 234, 0.2); color: #a3b1f0; border: 1px solid #667eea; }
-        .badge-data { background: rgba(255, 107, 107, 0.2); color: #ff8787; border: 1px solid #ff6b6b; }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            font-style: italic;
-        }
-
         /* --- DEVELOPER CARDS STYLES --- */
         .dev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; padding: 40px 0; }
         .dev-card { background: #1a1a1a; border-radius: 20px; overflow: hidden; position: relative; border: 2px solid #333; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; opacity: 0; transform: translateY(30px); }
@@ -331,9 +247,8 @@
         .section-visible .dev-card:nth-child(4) { animation-delay: 0.4s; }
         .section-visible .dev-card:nth-child(5) { animation-delay: 0.5s; }
         .section-visible .dev-card:nth-child(6) { animation-delay: 0.6s; }
+        .section-visible .dev-card:nth-child(7) { animation-delay: 0.7s; }
         .dev-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.6); z-index: 2; }
-        .dev-card.lead-dev { border-color: #667eea; } .dev-card.lead-dev:hover { box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3); border-color: #889df5; }
-        .dev-card.frontend { border-color: #764ba2; } .dev-card.frontend:hover { box-shadow: 0 15px 50px rgba(118, 75, 162, 0.3); border-color: #996ccf; }
         .dev-card.backend { border-color: #f093fb; } .dev-card.backend:hover { box-shadow: 0 15px 50px rgba(240, 147, 251, 0.3); border-color: #f5c2fa; }
         .dev-card.assistant { border-color: #4facfe; } .dev-card.assistant:hover { box-shadow: 0 15px 50px rgba(79, 172, 254, 0.3); border-color: #80c2ff; }
         .dev-header { padding: 30px; display: flex; align-items: center; gap: 20px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.1); transition: background 0.3s ease; }
@@ -343,8 +258,6 @@
         .dev-header-text h2 { font-size: 28px; color: #fff; margin-bottom: 5px; }
         .dev-header-text .role-badge { display: inline-block; padding: 5px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.3s ease; }
         .dev-card:hover .role-badge { transform: translateX(5px); }
-        .badge-lead { background: rgba(102, 126, 234, 0.2); color: #a3b1f0; border: 1px solid #667eea; }
-        .badge-front { background: rgba(118, 75, 162, 0.2); color: #cdb4eb; border: 1px solid #764ba2; }
         .badge-back { background: rgba(240, 147, 251, 0.2); color: #fbcffb; border: 1px solid #f093fb; }
         .badge-assist { background: rgba(79, 172, 254, 0.2); color: #addeff; border: 1px solid #4facfe; }
         .dev-body { padding: 30px; flex-grow: 1; }
@@ -362,7 +275,6 @@
             .top-controls { position: static; margin-top: 20px; justify-content: center; }
             .tiles-grid, .dev-grid { grid-template-columns: 1fr; }
             .dev-header { flex-direction: column; text-align: center; }
-            .history-table th, .history-table td { padding: 10px; font-size: 14px; }
         }
     </style>
 </head>
@@ -380,46 +292,41 @@
                     <span>👨‍💻</span>
                     <span class="btn-label">Developers</span>
                 </button>
-                <!-- History Button -->
-                <button class="icon-btn history-btn" onclick="showHistoryPage()" title="Ctrl + H">
-                    <span>📜</span>
-                    <span class="btn-label">History Log</span>
-                </button>
             </div>
         </div>
 
         <div class="tiles-grid">
-            <a href="#" class="tile" data-key="Ctrl + R" onclick="console.log('Link to Recent Notifications page'); alert('Link to Recent Notifications page'); return false;">
+            <a href="#" class="tile" data-key="Ctrl + R" data-app="Recent Notifications" data-type="App Usage" onclick="alert('Link to Recent Notifications page'); return false;">
                 <div class="tile-icon">🔔</div>
                 <div class="tile-title">Recent Notifications</div>
                 <div class="tile-description">Stay updated with latest announcements</div>
             </a>
-            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" data-key="Ctrl + S" target="_blank">
+            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" data-key="Ctrl + S" data-app="Sight Words" data-type="App Usage" target="_blank">
                 <div class="tile-icon">👁️</div>
                 <div class="tile-title">Sight Words</div>
                 <div class="tile-description">Master high-frequency words</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" data-key="Ctrl + Alt + W" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" data-key="Ctrl + Alt + W" data-app="Word of the Day" data-type="App Usage" target="_blank">
                 <div class="tile-icon">📖</div>
                 <div class="tile-title">Word of the Day</div>
                 <div class="tile-description">Expand your vocabulary daily</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" data-key="Ctrl + I" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" data-key="Ctrl + I" data-app="Idioms" data-type="App Usage" target="_blank">
                 <div class="tile-icon">💬</div>
                 <div class="tile-title">Idioms</div>
                 <div class="tile-description">Learn expressions and phrases</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" data-key="Ctrl + Shift + S" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec" class="tile" data-key="Ctrl + Shift + S" data-app="Situation" data-type="App Usage" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Situation</div>
                 <div class="tile-description">Real-life scenarios and solutions</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" data-key="Ctrl + M" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" data-key="Ctrl + M" data-app="Mental Math" data-type="App Usage" target="_blank">
                 <div class="tile-icon">🧮</div>
                 <div class="tile-title">Mental Math</div>
                 <div class="tile-description">Quick calculation challenges</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" data-key="Ctrl + Q" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" data-key="Ctrl + Q" data-app="Quiz" data-type="App Usage" target="_blank">
                 <div class="tile-icon">🎯</div>
                 <div class="tile-title">Quiz</div>
                 <div class="tile-description">Test your knowledge</div>
@@ -429,17 +336,17 @@
                 <div class="tile-title">Teacher Data Capture Sheet</div>
                 <div class="tile-description">Google sheet links to enter the data</div>
             </a>
-            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" data-key="Ctrl + Z" target="_blank">
+            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" data-key="Ctrl + Z" data-app="Zoko AI" data-type="App Usage" target="_blank">
                 <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo"></div>
                 <div class="tile-title">Zoko AI</div>
                 <div class="tile-description">Your AI-powered assistant</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" data-key="Ctrl + Shift + I" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" data-key="Ctrl + Shift + I" data-app="Interactive Activities" data-type="App Usage" target="_blank">
                 <div class="tile-icon">🎭</div>
                 <div class="tile-title">Interactive Activities</div>
                 <div class="tile-description">Watch; Play; Imagine; Repeat</div>
             </a>
-            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" data-key="Ctrl + Shift + R" target="_blank">
+            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" data-key="Ctrl + Shift + R" data-app="Riddles" data-type="App Usage" target="_blank">
                 <div class="tile-icon">❓</div>
                 <div class="tile-title">Riddles</div>
                 <div class="tile-description">Challenge your mind with puzzles</div>
@@ -456,47 +363,47 @@
                 <button onclick="showMainDashboard()" class="nav-btn" title="Ctrl + B">← Back to Dashboard</button>
             </div>
             <div class="tiles-grid">
-                <a href="#" class="tile" data-key="Ctrl + R" onclick="console.log('Link to Recent Notifications data entry sheet'); alert('Link to Recent Notifications data entry sheet'); return false;">
+                <a href="#" class="tile" data-key="Ctrl + R" data-app="Recent Notifications" data-type="Data Entry" onclick="alert('Link to Recent Notifications data entry sheet'); return false;">
                     <div class="tile-icon">🔔</div>
                     <div class="tile-title">Recent Notifications</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" data-key="Ctrl + S" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" data-key="Ctrl + S" data-app="Sight Words" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">👁️</div>
                     <div class="tile-title">Sight Words</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" data-key="Ctrl + Alt + W" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" data-key="Ctrl + Alt + W" data-app="Word of the Day" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">📖</div>
                     <div class="tile-title">Word of the Day</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" data-key="Ctrl + I" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" data-key="Ctrl + I" data-app="Idioms" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">💬</div>
                     <div class="tile-title">Idioms</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + S" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + S" data-app="Situation" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Situation</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" data-key="Ctrl + M" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" data-key="Ctrl + M" data-app="Mental Math" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">🧮</div>
                     <div class="tile-title">Mental Math</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" data-key="Ctrl + Q" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" data-key="Ctrl + Q" data-app="Quiz" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">🎯</div>
                     <div class="tile-title">Quiz</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + I" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + I" data-app="Interactive Activities" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">🎭</div>
                     <div class="tile-title">Interactive Activities</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + R" target="_blank">
+                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" data-key="Ctrl + Shift + R" data-app="Riddles" data-type="Data Entry" target="_blank">
                     <div class="tile-icon">❓</div>
                     <div class="tile-title">Riddles</div>
                     <div class="tile-description">Click to enter the data</div>
@@ -505,39 +412,7 @@
         </div>
     </div>
 
-    <!-- HISTORY LOG PAGE -->
-    <div id="historyPage" style="display: none;">
-        <div class="container">
-            <div class="header animate-enter">
-                <h1>Usage History</h1>
-                <p>Track your App and Data Sheet Usage</p>
-                <div style="display: flex; justify-content: center; gap: 10px;">
-                    <button onclick="showMainDashboard()" class="nav-btn" title="Ctrl + B">← Back to Dashboard</button>
-                    <button onclick="clearHistory()" class="nav-btn danger">Clear History</button>
-                </div>
-            </div>
-
-            <div class="history-container animate-enter">
-                <table class="history-table">
-                    <thead>
-                        <tr>
-                            <th>Time / Date</th>
-                            <th>Activity Name</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody id="historyTableBody">
-                        <!-- JavaScript will populate this -->
-                    </tbody>
-                </table>
-                <div id="emptyState" class="empty-state" style="display: none;">
-                    No history found. Start using the apps to generate logs.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ELABORATE DEVELOPERS PAGE -->
+    <!-- DEVELOPERS PAGE -->
     <div id="developersPage" style="display: none;">
         <div class="container">
             <div class="header animate-enter">
@@ -547,7 +422,6 @@
             </div>
 
             <div class="dev-grid">
-                <!-- Developer Cards (Same as original) -->
                 <div class="dev-card backend">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/f093fb/ffffff?text=SE" alt="Smt. Elavarisi" class="dev-photo-large">
@@ -572,7 +446,7 @@
                 <div class="dev-card backend">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/f093fb/ffffff?text=MN" alt="Mayurarajan NS" class="dev-photo-large">
-                        <div class="dev-header-text"><h2>Mayurarajan NS</h2><span class="role-badge badge-back">Metal Math Developer</span></div>
+                        <div class="dev-header-text"><h2>Mayurarajan NS</h2><span class="role-badge badge-back">Mental Math Developer</span></div>
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Mental Math Tile</li><li>Created Situation</li></ul></div>
                 </div>
@@ -583,30 +457,35 @@
                     </div>
                     <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Vedic Maths</li><li>Planned the work.</li></ul></div>
                 </div>
-                 <div class="dev-card assistant">
+                <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/4facfe/ffffff?text=A" alt="Anand" class="dev-photo-large">
-                        <div class="dev-header-text"><h2>Anand</h2><span class="role-badge badge-assist">Word of the Day, Idioms of the day, Zoko AI, Riddles Developer</span></div>
+                        <div class="dev-header-text"><h2>Anand</h2><span class="role-badge badge-assist">Multi-App Developer</span></div>
                     </div>
-                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Built most of the apps</li><li>Dedicated Work</li></ul></div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Built Word of the Day, Idioms, Zoko AI, Riddles</li><li>Dedicated Work</li></ul></div>
                 </div>
-                 <div class="dev-card assistant">
+                <div class="dev-card assistant">
                     <div class="dev-header">
                         <img src="https://placehold.co/200x200/f093fb/ffffff?text=GG" alt="Gaurav Gadin" class="dev-photo-large">
                         <div class="dev-header-text"><h2>Gaurav Gadin</h2><span class="role-badge badge-assist">Presenter</span></div>
                     </div>
-                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Presented our work to Vikshit Bharat</li><li>Prepared wonderful speech for that.</li></ul></div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Presented our work to Vikshit Bharat</li><li>Prepared wonderful speech</li></ul></div>
                 </div>
             </div>
         </div>
+    </div>
 
     <script>
-        // Navigation Logic
+        // ===== SUPABASE CONFIGURATION =====
+        // REPLACE THESE WITH YOUR ACTUAL VALUES
+        const SUPABASE_URL = 'https://xgpiylzqezdauwyunbuy.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhncGl5bHpxZXpkYXV3eXVuYnV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM5NjI1MTQsImV4cCI6MjA3OTUzODUxNH0.r0VqrYJVlA-jemsRKyOTqqNUeNqBADhAkcQw8AOf3gg';
+
+        // ===== Navigation Logic =====
         const sections = {
             dashboard: document.getElementById('mainDashboard'),
             dataCapture: document.getElementById('dataCaptureSection'),
-            developers: document.getElementById('developersPage'),
-            history: document.getElementById('historyPage')
+            developers: document.getElementById('developersPage')
         };
 
         function hideAll() {
@@ -620,7 +499,6 @@
             hideAll();
             const target = sections[sectionId];
             target.style.display = 'block';
-            // Trigger reflow to restart animation
             void target.offsetWidth; 
             target.classList.add('section-visible');
             window.scrollTo(0, 0);
@@ -629,185 +507,108 @@
         function showMainDashboard() { switchSection('dashboard'); }
         function showDataCapture() { switchSection('dataCapture'); }
         function showDevelopersPage() { switchSection('developers'); }
-        function showHistoryPage() { 
-            renderHistory();
-            switchSection('history'); 
-        }
 
-        // --- HISTORY TRACKING LOGIC ---
-
-        // Function to save usage to LocalStorage
-        function logUsage(appName, type) {
-            const now = new Date();
-            const timestamp = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
-            
-            const newEntry = {
-                app: appName,
-                type: type, // 'App Usage' or 'Data Entry'
-                time: timestamp
-            };
-
-            // Get existing history or empty array
-            let history = JSON.parse(localStorage.getItem('excellenceHistory') || '[]');
-            
-            // Add new entry to start of array
-            history.unshift(newEntry);
-            
-            // Save back to storage
-            localStorage.setItem('excellenceHistory', JSON.stringify(history));
-        }
-
-        // Function to render table
-        function renderHistory() {
-            const history = JSON.parse(localStorage.getItem('excellenceHistory') || '[]');
-            const tbody = document.getElementById('historyTableBody');
-            const emptyState = document.getElementById('emptyState');
-            
-            tbody.innerHTML = '';
-
-            if (history.length === 0) {
-                emptyState.style.display = 'block';
-                return;
-            }
-
-            emptyState.style.display = 'none';
-
-            history.forEach(entry => {
-                const tr = document.createElement('tr');
+        // ===== SUPABASE LOGGING FUNCTION =====
+        async function logToSupabase(appName, usageType) {
+            try {
+                const deviceInfo = navigator.userAgent;
                 
-                // Badge Class based on type
-                const badgeClass = entry.type === 'App Usage' ? 'badge-tool' : 'badge-data';
-                
-                tr.innerHTML = `
-                    <td style="color: #888;">${entry.time}</td>
-                    <td style="color: #fff; font-weight: bold;">${entry.app}</td>
-                    <td><span class="badge ${badgeClass}">${entry.type}</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function clearHistory() {
-            if(confirm("Are you sure you want to clear the usage log?")) {
-                localStorage.removeItem('excellenceHistory');
-                renderHistory();
-            }
-        }
-
-        // --- AUTO-ATTACH EVENT LISTENERS ---
-        // This script runs on load, finds all tiles, and attaches the logger
-        document.addEventListener("DOMContentLoaded", function() {
-            const dashboardTiles = document.querySelectorAll('#mainDashboard .tile');
-            const dataTiles = document.querySelectorAll('#dataCaptureSection .tile');
-
-            // Attach to Dashboard Apps
-            dashboardTiles.forEach(tile => {
-                // We keep existing onclick but add logging
-                tile.addEventListener('click', function() {
-                    const title = this.querySelector('.tile-title').innerText;
-                    // Don't log "Data Capture" navigation tile, only actual apps
-                    if(!title.includes("Data Capture")) {
-                        logUsage(title, 'App Usage');
-                    }
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/excellence_history`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        app_name: appName,
+                        usage_type: usageType,
+                        device_info: deviceInfo
+                    })
                 });
-            });
 
-            // Attach to Data Capture Sheets
-            dataTiles.forEach(tile => {
+                if (!response.ok) {
+                    console.error('Failed to log usage:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error logging to Supabase:', error);
+            }
+        }
+
+        // ===== AUTO-ATTACH EVENT LISTENERS =====
+        document.addEventListener("DOMContentLoaded", function() {
+            const allTiles = document.querySelectorAll('.tile[data-app]');
+
+            allTiles.forEach(tile => {
                 tile.addEventListener('click', function() {
-                    const title = this.querySelector('.tile-title').innerText;
-                    logUsage(title, 'Data Entry');
+                    const appName = this.getAttribute('data-app');
+                    const usageType = this.getAttribute('data-type');
+                    
+                    if (appName && usageType) {
+                        logToSupabase(appName, usageType);
+                    }
                 });
             });
         });
 
-        // --- KEYBOARD SHORTCUT LOGIC (UPDATED WITH LOGGING) ---
-        
-        function executeAction(dashboardUrl, captureUrl, isAlert = false, alertMsg = "", appName = "") {
-            if (sections.dashboard.style.display !== 'none' && dashboardUrl) {
-                // Log Usage
-                logUsage(appName, 'App Usage');
-                
-                if(isAlert) { console.log(alertMsg); alert(alertMsg); }
-                else { window.open(dashboardUrl, '_blank'); }
-            } else if (sections.dataCapture.style.display !== 'none' && captureUrl) {
-                // Log Usage
-                logUsage(appName, 'Data Entry');
-                
-                if(isAlert) { console.log(alertMsg); alert(alertMsg); }
-                else { window.open(captureUrl, '_blank'); }
-            }
-        }
-
+        // ===== KEYBOARD SHORTCUTS =====
         document.addEventListener('keydown', function(e) {
-            // Navigation Shortcuts
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') { e.preventDefault(); showDataCapture(); return; }
-            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'm') { e.preventDefault(); showDevelopersPage(); return; }
-            if (e.ctrlKey && e.key.toLowerCase() === 'b') { e.preventDefault(); showMainDashboard(); return; }
-            
-            // New Shortcut for History: Ctrl + H
-            if (e.ctrlKey && e.key.toLowerCase() === 'h') { e.preventDefault(); showHistoryPage(); return; }
-
-            // Content Shortcuts
-            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'r') {
-                e.preventDefault();
-                // Manually handle Recent Notifications logging since it's special (alert based)
-                if (sections.dashboard.style.display !== 'none') {
-                    logUsage('Recent Notifications', 'App Usage');
-                    alert('Link to Recent Notifications page');
-                } else if (sections.dataCapture.style.display !== 'none') {
-                    logUsage('Recent Notifications', 'Data Entry');
-                    alert('Link to Recent Notifications data entry sheet');
-                }
-                return;
+            // Navigation
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') { 
+                e.preventDefault(); showDataCapture(); return; 
+            }
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'm') { 
+                e.preventDefault(); showDevelopersPage(); return; 
+            }
+            if (e.ctrlKey && e.key.toLowerCase() === 'b') { 
+                e.preventDefault(); showMainDashboard(); return; 
             }
 
-            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 's') {
-                e.preventDefault();
-                executeAction('https://tinyurl.com/CCCEEEwordcraft', 'https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing', false, "", "Sight Words");
-                return;
-            }
-            if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'w') {
-                e.preventDefault();
-                executeAction('https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec', 'https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing', false, "", "Word of the Day");
-                return;
-            }
-            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'i') {
-                e.preventDefault();
-                executeAction('https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec', 'https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing', false, "", "Idioms");
-                return;
-            }
+            // App Shortcuts
+            const shortcuts = {
+                'r': { ctrl: true, shift: false, alert: true, msg: 'Recent Notifications', appName: 'Recent Notifications' },
+                's': { ctrl: true, shift: false, url: 'https://tinyurl.com/CCCEEEwordcraft', appName: 'Sight Words' },
+                'w': { ctrl: true, alt: true, url: 'https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec', appName: 'Word of the Day' },
+                'i': { ctrl: true, shift: false, url: 'https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec', appName: 'Idioms' },
+                'm': { ctrl: true, shift: false, url: 'https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec', appName: 'Mental Math' },
+                'q': { ctrl: true, shift: false, url: 'https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec', appName: 'Quiz' },
+                'z': { ctrl: true, shift: false, url: 'https://tinyurl.com/zoko-ai-assistant', appName: 'Zoko AI' }
+            };
+
+            // Handle 'S' for Situation (Ctrl+Shift+S)
             if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 's') {
                 e.preventDefault();
-                executeAction('https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec', 'https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing', false, "", "Situation");
+                const type = sections.dashboard.style.display !== 'none' ? 'App Usage' : 'Data Entry';
+                const url = sections.dashboard.style.display !== 'none' 
+                    ? 'https://script.google.com/macros/s/AKfycbxH1cZkXBizBftuqgqTcjhhS7FmQC0jh7FVmNAHYUZ8SA_51Wxgl20zUXkCVJ7Y_DDi1A/exec'
+                    : 'https://docs.google.com/spreadsheets/d/1H6R8tWP1m6axmiapCLY7K1PW7RCBbQ27Rm5O-zikoao/edit?usp=sharing';
+                logToSupabase('Situation', type);
+                window.open(url, '_blank');
                 return;
             }
-            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'm') {
-                e.preventDefault();
-                executeAction('https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec', 'https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing', false, "", "Mental Math");
-                return;
-            }
-            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'q') {
-                e.preventDefault();
-                executeAction('https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec', 'https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing', false, "", "Quiz");
-                return;
-            }
-            if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'z') {
-                e.preventDefault();
-                if (sections.dashboard.style.display !== 'none') {
-                    logUsage("Zoko AI", "App Usage");
-                    window.open('https://tinyurl.com/zoko-ai-assistant', '_blank');
-                }
-                return;
-            }
+
+            // Handle 'I' for Interactive (Ctrl+Shift+I)
             if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
                 e.preventDefault();
-                executeAction('https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec', 'https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing', false, "", "Interactive Activities");
+                const type = sections.dashboard.style.display !== 'none' ? 'App Usage' : 'Data Entry';
+                const url = sections.dashboard.style.display !== 'none' 
+                    ? 'https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec'
+                    : 'https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing';
+                logToSupabase('Interactive Activities', type);
+                window.open(url, '_blank');
                 return;
             }
+
+            // Handle 'R' for Riddles (Ctrl+Shift+R)
             if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'r') {
                 e.preventDefault();
-                executeAction('https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec', 'https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing', false, "", "Riddles");
+                const type = sections.dashboard.style.display !== 'none' ? 'App Usage' : 'Data Entry';
+                const url = sections.dashboard.style.display !== 'none' 
+                    ? 'https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec'
+                    : 'https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing';
+                logToSupabase('Riddles', type);
+                window.open(url, '_blank');
                 return;
             }
         });
