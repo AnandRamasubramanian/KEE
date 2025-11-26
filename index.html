@@ -56,6 +56,10 @@
             position: absolute;
             top: 0;
             right: 0;
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            gap: 15px; /* Spacing between buttons */
+            align-items: flex-end; /* Align buttons to the right edge */
         }
 
         .icon-btn {
@@ -71,10 +75,22 @@
             align-items: center;
             gap: 10px;
             height: 60px;
+            transition: all 0.3s ease;
         }
 
         .icon-btn:hover {
             background: linear-gradient(135deg, #5a6fd1 0%, #66418c 100%);
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Specific style for customization button to distinguish slightly if needed */
+        .icon-btn.custom-btn {
+            background: linear-gradient(135deg, #FF9966 0%, #FF5E62 100%);
+            border-color: #FF9966;
+        }
+        .icon-btn.custom-btn:hover {
+            background: linear-gradient(135deg, #ff8c55 0%, #ff4b50 100%);
             border-color: #fff;
         }
 
@@ -116,11 +132,13 @@
             align-items: center;
             justify-content: center;
             min-height: 250px;
+            transition: all 0.3s ease;
         }
 
         .tile:hover {
             background: #252525;
             border-color: #fff;
+            transform: translateY(-5px);
         }
 
         .tile-icon { font-size: 64px; margin-bottom: 20px; }
@@ -238,7 +256,13 @@
         @media (max-width: 768px) {
             .header h1 { font-size: 42px; }
             .header p { font-size: 20px; }
-            .top-controls { position: static; margin-top: 20px; justify-content: center; display: flex; }
+            /* Mobile adjustment for top controls */
+            .top-controls { 
+                position: static; 
+                margin-top: 20px; 
+                justify-content: center; 
+                flex-wrap: wrap; 
+            }
             .tiles-grid, .dev-grid { grid-template-columns: 1fr; }
             .dev-header { flex-direction: column; text-align: center; }
             body { padding: 20px 10px; }
@@ -254,9 +278,15 @@
             <p>Boost Your Learning Journey</p>
             
             <div class="top-controls">
+                <!-- Developers Button (Top) -->
                 <button class="icon-btn" onclick="showDevelopersPage()">
                     <span>👨‍💻</span>
                     <span>Developers</span>
+                </button>
+                <!-- Teacher Customization Button (Bottom) -->
+                <button class="icon-btn custom-btn" onclick="showDataCapture()">
+                    <span>⚙️</span>
+                    <span>Teacher Customization</span>
                 </button>
             </div>
         </div>
@@ -297,11 +327,6 @@
                 <div class="tile-title">Quiz</div>
                 <div class="tile-description">Test your knowledge</div>
             </a>
-            <a href="#" class="tile" onclick="showDataCapture(); return false;">
-                <div class="tile-icon">📊</div>
-                <div class="tile-title">Teacher Data Capture Sheet</div>
-                <div class="tile-description">Google sheet links to enter the data</div>
-            </a>
             <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" target="_blank">
                 <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo" loading="lazy"></div>
                 <div class="tile-title">Zoko AI</div>
@@ -320,58 +345,58 @@
         </div>
     </div>
 
-    <!-- DATA CAPTURE SECTION -->
+    <!-- TEACHER CUSTOMIZATION SECTION (Formerly Data Capture) -->
     <div id="dataCaptureSection" style="display: none;">
         <div class="container">
             <div class="header">
-                <h1>Teacher Data Capture Sheet</h1>
+                <h1>Teacher Customization</h1>
                 <p>Select an activity to enter data</p>
                 <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
             </div>
             <div class="tiles-grid">
                 <a href="#" class="tile" onclick="alert('Link to Recent Notifications data entry sheet'); return false;">
                     <div class="tile-icon">🔔</div>
-                    <div class="tile-title">Recent Notifications</div>
+                    <div class="tile-title">Recent Notifications (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">👁️</div>
-                    <div class="tile-title">Sight Words</div>
+                    <div class="tile-title">Sight Words (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">📖</div>
-                    <div class="tile-title">Word of the Day</div>
+                    <div class="tile-title">Word of the Day (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">💬</div>
-                    <div class="tile-title">Idioms</div>
+                    <div class="tile-title">Idioms (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1yOOa36eZKIFJgt10dLXBpz3SP-dHx9SKwzzEKPy_Dvs/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎭</div>
-                    <div class="tile-title">Video Library</div>
+                    <div class="tile-title">Video Library (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🧮</div>
-                    <div class="tile-title">Mental Math</div>
+                    <div class="tile-title">Mental Math (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎯</div>
-                    <div class="tile-title">Quiz</div>
+                    <div class="tile-title">Quiz (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">🎭</div>
-                    <div class="tile-title">Interactive Activities</div>
+                    <div class="tile-title">Interactive Activities (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" target="_blank">
                     <div class="tile-icon">❓</div>
-                    <div class="tile-title">Challenges</div>
+                    <div class="tile-title">Challenges (Google Sheets)</div>
                     <div class="tile-description">Click to enter the data</div>
                 </a>
             </div>
