@@ -1,985 +1,515 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Excellence Engine</title>
-
-
-<!-- Preconnect for faster font loading -->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-
-
-<style>
-
-/* --- Reset & Base --- */
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-
-body {
-
-font-family: 'Inter', sans-serif;
-
-background: #050505;
-
-color: #fff;
-
-min-height: 100vh;
-
-padding: 40px 20px;
-
-overflow-x: hidden;
-
-text-rendering: optimizeLegibility;
-
-}
-
-
-
-.container {
-
-max-width: 1400px;
-
-margin: 0 auto;
-
-}
-
-
-
-a { text-decoration: none; }
-
-
-
-/* --- Header --- */
-
-.header {
-
-text-align: center;
-
-margin-bottom: 60px;
-
-position: relative;
-
-}
-
-
-
-.header h1 {
-
-font-size: 72px;
-
-color: #ffd700;
-
-text-transform: uppercase;
-
-letter-spacing: 3px;
-
-margin-bottom: 20px;
-
-}
-
-
-
-.header p {
-
-font-size: 32px;
-
-color: #aaa;
-
-}
-
-
-
-/* --- Controls --- */
-
-.top-controls {
-
-position: absolute;
-
-top: 0;
-
-right: 0;
-
-display: flex;
-
-flex-direction: column; /* Stack buttons vertically */
-
-gap: 15px; /* Spacing between buttons */
-
-align-items: flex-end; /* Align buttons to the right edge */
-
-}
-
-
-
-.icon-btn {
-
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-border: 3px solid #667eea;
-
-border-radius: 30px;
-
-padding: 10px 20px;
-
-color: #fff;
-
-font-size: 18px;
-
-font-weight: 600;
-
-cursor: pointer;
-
-display: flex;
-
-align-items: center;
-
-gap: 10px;
-
-height: 60px;
-
-transition: all 0.3s ease;
-
-}
-
-
-
-.icon-btn:hover {
-
-background: linear-gradient(135deg, #5a6fd1 0%, #66418c 100%);
-
-border-color: #fff;
-
-transform: translateY(-2px);
-
-}
-
-
-
-/* Specific style for customization button to distinguish slightly if needed */
-
-.icon-btn.custom-btn {
-
-background: linear-gradient(135deg, #FF9966 0%, #FF5E62 100%);
-
-border-color: #FF9966;
-
-}
-
-.icon-btn.custom-btn:hover {
-
-background: linear-gradient(135deg, #ff8c55 0%, #ff4b50 100%);
-
-border-color: #fff;
-
-}
-
-
-
-.nav-btn {
-
-background: #ffd700;
-
-color: #000;
-
-border: none;
-
-padding: 15px 30px;
-
-font-size: 20px;
-
-border-radius: 10px;
-
-cursor: pointer;
-
-margin-top: 20px;
-
-font-weight: bold;
-
-}
-
-
-
-.nav-btn:hover {
-
-background: #ffed4a;
-
-}
-
-
-
-/* --- Grid Layouts --- */
-
-.tiles-grid {
-
-display: grid;
-
-grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-
-gap: 30px;
-
-padding: 20px;
-
-}
-
-
-
-/* --- Tile Components --- */
-
-.tile {
-
-background: #1a1a1a;
-
-border: 4px solid #444;
-
-border-radius: 20px;
-
-padding: 40px 30px;
-
-text-align: center;
-
-cursor: pointer;
-
-color: #fff;
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-justify-content: center;
-
-min-height: 250px;
-
-transition: all 0.3s ease;
-
-}
-
-
-
-.tile:hover {
-
-background: #252525;
-
-border-color: #fff;
-
-transform: translateY(-5px);
-
-}
-
-
-
-.tile-icon { font-size: 64px; margin-bottom: 20px; }
-
-.tile-icon img { width: 64px; height: 64px; object-fit: contain; }
-
-
-.tile-title {
-
-font-size: 36px;
-
-font-weight: bold;
-
-margin-bottom: 15px;
-
-color: #ffd700;
-
-}
-
-
-.tile-description {
-
-font-size: 20px;
-
-color: #bbb;
-
-line-height: 1.4;
-
-}
-
-
-.tile:hover .tile-description { color: #fff; }
-
-
-
-/* Specific Tile Borders */
-
-.tile:nth-child(1) { border-color: #ff6b6b; }
-
-.tile:nth-child(1) .tile-title { color: #ff6b6b; }
-
-
-.tile:nth-child(2) { border-color: #4ecdc4; }
-
-.tile:nth-child(2) .tile-title { color: #4ecdc4; }
-
-
-.tile:nth-child(3) { border-color: #95e1d3; }
-
-.tile:nth-child(3) .tile-title { color: #95e1d3; }
-
-
-.tile:nth-child(4) { border-color: #f38181; }
-
-.tile:nth-child(4) .tile-title { color: #f38181; }
-
-
-.tile:nth-child(5) { border-color: #aa96da; }
-
-.tile:nth-child(5) .tile-title { color: #aa96da; }
-
-
-.tile:nth-child(6) { border-color: #fcbad3; }
-
-.tile:nth-child(6) .tile-title { color: #fcbad3; }
-
-
-.tile:nth-child(7) { border-color: #ffd700; }
-
-
-.tile:nth-child(8) { border-color: #51cf66; }
-
-.tile:nth-child(8) .tile-title { color: #51cf66; }
-
-
-.tile:nth-child(9) { border-color: #4d94ff; }
-
-.tile:nth-child(9) .tile-title { color: #4d94ff; }
-
-
-.tile:nth-child(10) { border-color: #ff9800; }
-
-.tile:nth-child(10) .tile-title { color: #ff9800; }
-
-
-.tile:nth-child(11) { border-color: #9370DB; }
-
-.tile:nth-child(11) .tile-title { color: #9370DB; }
-
-
-
-/* --- Developer Cards --- */
-
-.dev-grid {
-
-display: grid;
-
-grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-
-gap: 40px;
-
-padding: 40px 0;
-
-}
-
-
-
-.dev-card {
-
-background: #1a1a1a;
-
-border-radius: 20px;
-
-overflow: hidden;
-
-border: 2px solid #333;
-
-display: flex;
-
-flex-direction: column;
-
-}
-
-
-
-.dev-card:hover { border-color: #fff; background: #222; }
-
-
-
-.dev-card.backend { border-color: #f093fb; }
-
-.dev-card.assistant { border-color: #4facfe; }
-
-
-
-.dev-header {
-
-padding: 20px;
-
-display: flex;
-
-align-items: center;
-
-gap: 20px;
-
-background: rgba(255,255,255,0.03);
-
-border-bottom: 1px solid rgba(255,255,255,0.1);
-
-}
-
-
-
-.dev-photo-large {
-
-width: 80px;
-
-height: 80px;
-
-border-radius: 50%;
-
-object-fit: cover;
-
-border: 3px solid rgba(255,255,255,0.2);
-
-}
-
-
-
-.dev-header-text h2 { font-size: 24px; color: #fff; margin-bottom: 5px; }
-
-
-.role-badge {
-
-display: inline-block;
-
-padding: 4px 10px;
-
-border-radius: 15px;
-
-font-size: 12px;
-
-font-weight: bold;
-
-text-transform: uppercase;
-
-}
-
-
-
-.badge-back { background: rgba(240, 147, 251, 0.2); color: #fbcffb; border: 1px solid #f093fb; }
-
-.badge-assist { background: rgba(79, 172, 254, 0.2); color: #addeff; border: 1px solid #4facfe; }
-
-
-
-.dev-body { padding: 25px; flex-grow: 1; }
-
-.dev-body h3 { color: #888; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; }
-
-
-.contribution-list { list-style: none; }
-
-.contribution-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #ddd; }
-
-.contribution-list li::before { content: "➜"; position: absolute; left: 0; color: #ffd700; }
-
-
-
-/* --- Media Queries --- */
-
-@media (max-width: 768px) {
-
-.header h1 { font-size: 42px; }
-
-.header p { font-size: 20px; }
-
-/* Mobile adjustment for top controls */
-
-.top-controls {
-
-position: static;
-
-margin-top: 20px;
-
-justify-content: center;
-
-flex-wrap: wrap;
-
-}
-
-.tiles-grid, .dev-grid { grid-template-columns: 1fr; }
-
-.dev-header { flex-direction: column; text-align: center; }
-
-body { padding: 20px 10px; }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excellence Engine</title>
+
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Reset & Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050505;
+            color: #fff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            text-rendering: optimizeLegibility;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        a { text-decoration: none; }
+
+        /* --- Header --- */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 72px;
+            color: #ffd700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 32px;
+            color: #aaa;
+        }
+
+        /* --- Controls --- */
+        .top-controls {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            gap: 15px; /* Spacing between buttons */
+            align-items: flex-end; /* Align buttons to the right edge */
+        }
+
+        .icon-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 3px solid #667eea;
+            border-radius: 30px;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 60px;
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            background: linear-gradient(135deg, #5a6fd1 0%, #66418c 100%);
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Specific style for customization button to distinguish slightly if needed */
+        .icon-btn.custom-btn {
+            background: linear-gradient(135deg, #FF9966 0%, #FF5E62 100%);
+            border-color: #FF9966;
+        }
+
+        .icon-btn.custom-btn:hover {
+            background: linear-gradient(135deg, #ff8c55 0%, #ff4b50 100%);
+            border-color: #fff;
+        }
+
+        .nav-btn {
+            background: #ffd700;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: #ffed4a;
+        }
+
+        /* --- Grid Layouts --- */
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        /* --- Tile Components --- */
+        .tile {
+            background: #1a1a1a;
+            border: 4px solid #444;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .tile:hover {
+            background: #252525;
+            border-color: #fff;
+            transform: translateY(-5px);
+        }
+
+        .tile-icon { font-size: 64px; margin-bottom: 20px; }
+        .tile-icon img { width: 64px; height: 64px; object-fit: contain; }
+
+        .tile-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .tile-description {
+            font-size: 20px;
+            color: #bbb;
+            line-height: 1.4;
+        }
+
+        .tile:hover .tile-description { color: #fff; }
+
+        /* Specific Tile Borders */
+        .tile:nth-child(1) { border-color: #ff6b6b; }
+        .tile:nth-child(1) .tile-title { color: #ff6b6b; }
+
+        .tile:nth-child(2) { border-color: #4ecdc4; }
+        .tile:nth-child(2) .tile-title { color: #4ecdc4; }
+
+        .tile:nth-child(3) { border-color: #95e1d3; }
+        .tile:nth-child(3) .tile-title { color: #95e1d3; }
+
+        .tile:nth-child(4) { border-color: #f38181; }
+        .tile:nth-child(4) .tile-title { color: #f38181; }
+
+        .tile:nth-child(5) { border-color: #aa96da; }
+        .tile:nth-child(5) .tile-title { color: #aa96da; }
+
+        .tile:nth-child(6) { border-color: #fcbad3; }
+        .tile:nth-child(6) .tile-title { color: #fcbad3; }
+
+        .tile:nth-child(7) { border-color: #ffd700; }
+
+        .tile:nth-child(8) { border-color: #51cf66; }
+        .tile:nth-child(8) .tile-title { color: #51cf66; }
+
+        .tile:nth-child(9) { border-color: #4d94ff; }
+        .tile:nth-child(9) .tile-title { color: #4d94ff; }
+
+        .tile:nth-child(10) { border-color: #ff9800; }
+        .tile:nth-child(10) .tile-title { color: #ff9800; }
+
+        .tile:nth-child(11) { border-color: #9370DB; }
+        .tile:nth-child(11) .tile-title { color: #9370DB; }
+
+        /* --- Developer Cards --- */
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        .dev-card {
+            background: #1a1a1a;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dev-card:hover { border-color: #fff; background: #222; }
+
+        .dev-card.backend { border-color: #f093fb; }
+        .dev-card.assistant { border-color: #4facfe; }
+
+        .dev-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dev-photo-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .dev-header-text h2 { font-size: 24px; color: #fff; margin-bottom: 5px; }
+
+        .role-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-back { background: rgba(240, 147, 251, 0.2); color: #fbcffb; border: 1px solid #f093fb; }
+        .badge-assist { background: rgba(79, 172, 254, 0.2); color: #addeff; border: 1px solid #4facfe; }
+
+        .dev-body { padding: 25px; flex-grow: 1; }
+        .dev-body h3 { color: #888; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; }
+
+        .contribution-list { list-style: none; }
+        .contribution-list li { margin-bottom: 8px; padding-left: 20px; position: relative; color: #ddd; }
+        .contribution-list li::before { content: "➜"; position: absolute; left: 0; color: #ffd700; }
+
+        /* --- Media Queries --- */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 42px; }
+            .header p { font-size: 20px; }
+            /* Mobile adjustment for top controls */
+            .top-controls {
+                position: static;
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .tiles-grid, .dev-grid { grid-template-columns: 1fr; }
+            .dev-header { flex-direction: column; text-align: center; }
+            body { padding: 20px 10px; }
+        }
+    </style>
 </head>
-
 <body>
 
-
-
-<!-- MAIN DASHBOARD SECTION -->
-
-<div id="mainDashboard" class="container">
-
-<div class="header">
-
-<h1>Excellence Engine</h1>
-
-<p>Boost Your Learning Journey</p>
-
-
-<div class="top-controls">
-
-<!-- Developers Button (Top) -->
-
-<button class="icon-btn" onclick="showDevelopersPage()">
-
-<span>👨‍💻</span>
-
-<span>Developers</span>
-
-</button>
-
-<!-- Teacher Customization Button (Bottom) -->
-
-<button class="icon-btn custom-btn" onclick="showDataCapture()">
-
-<span>⚙️</span>
-
-<span>Teacher Customization</span>
-
-</button>
-
-</div>
-
-</div>
-
-
-
-<div class="tiles-grid">
-
-<a href="#" class="tile" onclick="alert('Link to Recent Notifications page'); return false;">
-
-<div class="tile-icon">🔔</div>
-
-<div class="tile-title">Recent Notifications</div>
-
-<div class="tile-description">Stay updated with latest announcements</div>
-
-</a>
-
-<a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" target="_blank">
-
-<div class="tile-icon">👁️</div>
-
-<div class="tile-title">Sight Words</div>
-
-<div class="tile-description">Master high-frequency words</div>
-
-</a>
-
-<a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" target="_blank">
-
-<div class="tile-icon">📖</div>
-
-<div class="tile-title">Word of the Day</div>
-
-<div class="tile-description">Expand your vocabulary daily</div>
-
-</a>
-
-<a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" target="_blank">
-
-<div class="tile-icon">💬</div>
-
-<div class="tile-title">Idioms</div>
-
-<div class="tile-description">Learn expressions and phrases</div>
-
-</a>
-
-<a href="https://script.google.com/macros/s/AKfycbyOtC5gZ0qHFcEt5dNpQFig0EZBOgbsvgWGNAzWRQ45SrZ4Q1cBzNHs_r36RLF1I8XQqw/exec" class="tile" target="_blank">
-
-<div class="tile-icon">🎭</div>
-
-<div class="tile-title">Video Library</div>
-
-<div class="tile-description">Learn right with visuals that ignite</div>
-
-</a>
-
-<a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" target="_blank">
-
-<div class="tile-icon">🧮</div>
-
-<div class="tile-title">Mental Math</div>
-
-<div class="tile-description">Quick calculation challenges</div>
-
-</a>
-
-<a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" target="_blank">
-
-<div class="tile-icon">🎯</div>
-
-<div class="tile-title">Quiz</div>
-
-<div class="tile-description">Test your knowledge</div>
-
-</a>
-
-<a href="https://tinyurl.com/zoko-ai-assistant" class="tile" target="_blank">
-
-<div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo" loading="lazy"></div>
-
-<div class="tile-title">Zoko AI</div>
-
-<div class="tile-description">Your AI-powered assistant</div>
-
-</a>
-
-<a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" target="_blank">
-
-<div class="tile-icon">🎭</div>
-
-<div class="tile-title">Interactive Activities</div>
-
-<div class="tile-description">Watch; Play; Imagine; Repeat</div>
-
-</a>
-
-<a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" target="_blank">
-
-<div class="tile-icon">❓</div>
-
-<div class="tile-title">Challenges</div>
-
-<div class="tile-description">Challenge your mind with quizzes and puzzles</div>
-
-</a>
-
-</div>
-
-</div>
-
-
-
-<!-- TEACHER CUSTOMIZATION SECTION (Formerly Data Capture) -->
-
-<div id="dataCaptureSection" style="display: none;">
-
-<div class="container">
-
-<div class="header">
-
-<h1>Teacher Customization</h1>
-
-<p>Select an activity to enter data</p>
-
-<button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
-
-</div>
-
-<div class="tiles-grid">
-
-<a href="#" class="tile" onclick="alert('Link to Recent Notifications data entry sheet'); return false;">
-
-<div class="tile-icon">🔔</div>
-
-<div class="tile-title">Recent Notifications (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">👁️</div>
-
-<div class="tile-title">Sight Words (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">📖</div>
-
-<div class="tile-title">Word of the Day (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">💬</div>
-
-<div class="tile-title">Idioms (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/1yOOa36eZKIFJgt10dLXBpz3SP-dHx9SKwzzEKPy_Dvs/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">🎭</div>
-
-<div class="tile-title">Video Library (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">🧮</div>
-
-<div class="tile-title">Mental Math (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">🎯</div>
-
-<div class="tile-title">Quiz (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">🎭</div>
-
-<div class="tile-title">Interactive Activities (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-<a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" target="_blank">
-
-<div class="tile-icon">❓</div>
-
-<div class="tile-title">Challenges (Google Sheets)</div>
-
-<div class="tile-description">Click to enter the data</div>
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- DEVELOPERS PAGE -->
-
-<div id="developersPage" style="display: none;">
-
-<div class="container">
-
-<div class="header">
-
-<h1>Meet the Minds</h1>
-
-<p>The Architects of Excellence Engine</p>
-
-<button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
-
-</div>
-
-
-
-<div class="dev-grid">
-
-<div class="dev-card backend">
-
-<div class="dev-header">
-
-<img src="https://placehold.co/200x200/f093fb/ffffff?text=SE" alt="Smt. Elavarisi" class="dev-photo-large" loading="lazy">
-
-<div class="dev-header-text"><h2>Smt. Elavarisi</h2><span class="role-badge badge-back">Principal</span></div>
-
-</div>
-
-<div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>The root of our inspiration 🌳</li></ul></div>
-
-</div>
-
-<div class="dev-card backend">
-
-<div class="dev-header">
-
-<img src="https://placehold.co/200x200/f093fb/ffffff?text=SV" alt="Smt. Vasundhara" class="dev-photo-large" loading="lazy">
-
-<div class="dev-header-text"><h2>Smt. Vasundhara</h2><span class="role-badge badge-back">Vice Principal</span></div>
-
-</div>
-
-<div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Guiding us with wisdom and heart 💚</li></ul></div>
-
-</div>
-
-<div class="dev-card backend">
-
-<div class="dev-header">
-
-<img src="https://placehold.co/200x200/f093fb/ffffff?text=SA" alt="Smt. Aishwarya" class="dev-photo-large" loading="lazy">
-
-<div class="dev-header-text"><h2>Smt. Aishwarya</h2><span class="role-badge badge-back">Project Mentor</span></div>
-
-</div>
-
-<div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>The branch that supports every leaf 🌿</li></ul></div>
-
-</div>
-
-<div class="dev-card backend">
-
-<div class="dev-header">
-
-<img src="https://placehold.co/200x200/f093fb/ffffff?text=MN" alt="Mayurarajan NS" class="dev-photo-large" loading="lazy">
-
-<div class="dev-header-text"><h2>Mayurarajan NS</h2><span class="role-badge badge-back">Mental Math Developer</span></div>
-
-</div>
-
-<div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Mental Math Tile</li><li>Created Situation</li></ul></div>
-
-</div>
-
-<div class="dev-card assistant">
-
-<div class="dev-header">
-
-<img src="https://placehold.co/200x200/4facfe/ffffff?text=VN" alt="Visvesh Natarajan Iyer" class="dev-photo-large" loading="lazy">
-
-<div class="dev-header-text"><h2>Visvesh Natarajan Iyer</h2><span class="role-badge badge-assist">Vedic Maths Developer</span></div>
-
-</div>
-
-<div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Vedic Maths</li><li>Planned the work.</li></ul></div>
-
-</div>
-
-<div class="dev-card assistant">
-
-<div class="dev-header">
-
-<img src="https://placehold.co/200x200/4facfe/ffffff?text=A" alt="Anand" class="dev-photo-large" loading="lazy">
-
-<div class="dev-header-text"><h2>Anand</h2><span class="role-badge badge-assist">Multi-App Developer</span></div>
-
-</div>
-
-<div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Built Word of the Day, Idioms, Zoko AI, Riddles</li><li>Dedicated Work</li></ul></div>
-
-</div>
-
-<div class="dev-card assistant">
-
-<div class="dev-header">
-
-<img src="https://placehold.co/200x200/f093fb/ffffff?text=GG" alt="Gaurav Gadin" class="dev-photo-large" loading="lazy">
-
-<div class="dev-header-text"><h2>Gaurav Gadin</h2><span class="role-badge badge-assist">Presenter</span></div>
-
-</div>
-
-<div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Presented our work to Vikshit Bharat</li><li>Prepared wonderful speech</li></ul></div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<script>
-
-// ===== Simple Navigation Logic =====
-
-const sections = {
-
-dashboard: document.getElementById('mainDashboard'),
-
-dataCapture: document.getElementById('dataCaptureSection'),
-
-developers: document.getElementById('developersPage')
-
-};
-
-
-
-function hideAll() {
-
-Object.values(sections).forEach(section => {
-
-section.style.display = 'none';
-
-});
-
-}
-
-
-
-function showMainDashboard() {
-
-hideAll();
-
-sections.dashboard.style.display = 'block';
-
-window.scrollTo(0, 0);
-
-}
-
-
-
-function showDataCapture() {
-
-hideAll();
-
-sections.dataCapture.style.display = 'block';
-
-window.scrollTo(0, 0);
-
-}
-
-
-
-function showDevelopersPage() {
-
-hideAll();
-
-sections.developers.style.display = 'block';
-
-window.scrollTo(0, 0);
-
-}
-
-</script>
-
+    <!-- MAIN DASHBOARD SECTION -->
+    <div id="mainDashboard" class="container">
+        <div class="header">
+            <h1>Excellence Engine</h1>
+            <p>Boost Your Learning Journey</p>
+
+            <div class="top-controls">
+                <!-- Developers Button (Top) -->
+                <button class="icon-btn" onclick="showDevelopersPage()">
+                    <span>👨‍💻</span>
+                    <span>Developers</span>
+                </button>
+                <!-- Teacher Customization Button (Bottom) -->
+                <button class="icon-btn custom-btn" onclick="showDataCapture()">
+                    <span>⚙️</span>
+                    <span>Teacher Customization</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="tiles-grid">
+            <a href="#" class="tile" onclick="alert('Link to Recent Notifications page'); return false;">
+                <div class="tile-icon">🔔</div>
+                <div class="tile-title">Recent Notifications</div>
+                <div class="tile-description">Stay updated with latest announcements</div>
+            </a>
+            <a href="https://tinyurl.com/CCCEEEwordcraft" class="tile" target="_blank">
+                <div class="tile-icon">👁️</div>
+                <div class="tile-title">Sight Words</div>
+                <div class="tile-description">Master high-frequency words</div>
+            </a>
+            <a href="https://script.google.com/macros/s/AKfycbzb46DEzFV-ASNRbwU5_2Cz7sZd6j4zeskxyJnEbefGiCpnPyz-cvU_L65ocNXFtIQ7AA/exec" class="tile" target="_blank">
+                <div class="tile-icon">📖</div>
+                <div class="tile-title">Word of the Day</div>
+                <div class="tile-description">Expand your vocabulary daily</div>
+            </a>
+            <a href="https://script.google.com/macros/s/AKfycbygIWtwQxBIiSr-mgktZ-BokVTq-NnVM1c3y-gJ2Vht8YHDaPD_7mrDjwTS3rJbnwRo7A/exec" class="tile" target="_blank">
+                <div class="tile-icon">💬</div>
+                <div class="tile-title">Idioms</div>
+                <div class="tile-description">Learn expressions and phrases</div>
+            </a>
+            <a href="https://script.google.com/macros/s/AKfycbyOtC5gZ0qHFcEt5dNpQFig0EZBOgbsvgWGNAzWRQ45SrZ4Q1cBzNHs_r36RLF1I8XQqw/exec" class="tile" target="_blank">
+                <div class="tile-icon">🎭</div>
+                <div class="tile-title">Video Library</div>
+                <div class="tile-description">Learn right with visuals that ignite</div>
+            </a>
+            <a href="https://script.google.com/macros/s/AKfycbzS6QK2aBAY-q0Wu37zyxU3xsHg9u4A303l7F5jeQ7d4s0EeeJYBI79taVHTTNxlxVoAw/exec" class="tile" target="_blank">
+                <div class="tile-icon">🧮</div>
+                <div class="tile-title">Mental Math</div>
+                <div class="tile-description">Quick calculation challenges</div>
+            </a>
+            <a href="https://script.google.com/macros/s/AKfycbxjT-jfVuXsjWtYPAHTwBk25Lgi77wIMcnLa-N4bjTxWheHDEeQzTEkkVgXLHhfcCHR8g/exec" class="tile" target="_blank">
+                <div class="tile-icon">🎯</div>
+                <div class="tile-title">Quiz</div>
+                <div class="tile-description">Test your knowledge</div>
+            </a>
+            <a href="https://tinyurl.com/zoko-ai-assistant" class="tile" target="_blank">
+                <div class="tile-icon"><img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/690ed78ac7d7da3da3e75668/673cc3776_181202eb2_c6946e905_8b8274146_logo1.png" alt="Zoko AI Logo" loading="lazy"></div>
+                <div class="tile-title">Zoko AI</div>
+                <div class="tile-description">Your AI-powered assistant</div>
+            </a>
+            <a href="https://script.google.com/macros/s/AKfycbw_4XnwlOmIP6prIdkb0OgGyy_btrF6XVP7qfnl1wX-YYrqWJSfGlyKvjTUgS75Mzn3/exec" class="tile" target="_blank">
+                <div class="tile-icon">🎭</div>
+                <div class="tile-title">Interactive Activities</div>
+                <div class="tile-description">Watch; Play; Imagine; Repeat</div>
+            </a>
+            <a href="https://script.google.com/macros/s/AKfycbxKLpdWvzIFubNScTZELvPBlKcCR3lBfNkHbSd1uKqvUbt1YNJTm8N_XYd5JODHcQgo/exec" class="tile" target="_blank">
+                <div class="tile-icon">❓</div>
+                <div class="tile-title">Challenges</div>
+                <div class="tile-description">Challenge your mind with quizzes and puzzles</div>
+            </a>
+            <!-- NEW TILE: Spin the Wheel -->
+            <a href="https://script.google.com/macros/s/AKfycbzfBi3rJwShegeS7O6-h_9kgfqcrLqzekPIOyAJS85PsQOfVgH2cpz3joTGL5iaiRX6gg/exec" class="tile" target="_blank">
+                <div class="tile-icon">🎡</div>
+                <div class="tile-title">Spin the Wheel</div>
+                <div class="tile-description">Select student names randomly</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- TEACHER CUSTOMIZATION SECTION (Formerly Data Capture) -->
+    <div id="dataCaptureSection" style="display: none;">
+        <div class="container">
+            <div class="header">
+                <h1>Teacher Customization</h1>
+                <p>Select an activity to enter data</p>
+                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
+            </div>
+            <div class="tiles-grid">
+                <a href="#" class="tile" onclick="alert('Link to Recent Notifications data entry sheet'); return false;">
+                    <div class="tile-icon">🔔</div>
+                    <div class="tile-title">Recent Notifications (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1gi2UunxUPb5d7SAK69JhpViyASfNkA1ubG33zHbNVyk/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">👁️</div>
+                    <div class="tile-title">Sight Words (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1F7VLZRrfhpJCHB1FhimawZwiWViR2G7VAcbFMZqWU98/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">📖</div>
+                    <div class="tile-title">Word of the Day (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1Z8L-hIToDobIijYG9BRiIYBJRlPvV0N-n_COiSjMXXI/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">💬</div>
+                    <div class="tile-title">Idioms (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1yOOa36eZKIFJgt10dLXBpz3SP-dHx9SKwzzEKPy_Dvs/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">🎭</div>
+                    <div class="tile-title">Video Library (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/119NZqAp4tkLFsDSS0vlS87--XuyovRK8hwticNdfoJY/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">🧮</div>
+                    <div class="tile-title">Mental Math (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/19N9oqNfBzwGKdzt76eDXUB_Fd6LwjIe4AzSBW4sjV7Y/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">🎯</div>
+                    <div class="tile-title">Quiz (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/17dDvHVuGWinML3crElYRjJl3XznXqBT9MtsGORckWvc/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">🎭</div>
+                    <div class="tile-title">Interactive Activities (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1aAl-LDruhMo_oaHKGzbibzgatkYysOaPzTP2YQV9PjA/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">❓</div>
+                    <div class="tile-title">Challenges (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+                <!-- NEW TILE: Spin the Wheel Sheets -->
+                <a href="https://docs.google.com/spreadsheets/d/1Pp9EFfbj2lpTjpi00hfYqXZ-jqE7kxUzJnMeHMoQmBo/edit?usp=sharing" class="tile" target="_blank">
+                    <div class="tile-icon">🎡</div>
+                    <div class="tile-title">Spin the Wheel (Google Sheets)</div>
+                    <div class="tile-description">Click to enter the data</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEVELOPERS PAGE -->
+    <div id="developersPage" style="display: none;">
+        <div class="container">
+            <div class="header">
+                <h1>Meet the Minds</h1>
+                <p>The Architects of Excellence Engine</p>
+                <button onclick="showMainDashboard()" class="nav-btn">← Back to Dashboard</button>
+            </div>
+
+            <div class="dev-grid">
+                <div class="dev-card backend">
+                    <div class="dev-header">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SE" alt="Smt. Elavarisi" class="dev-photo-large" loading="lazy">
+                        <div class="dev-header-text"><h2>Smt. Elavarisi</h2><span class="role-badge badge-back">Principal</span></div>
+                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>The root of our inspiration 🌳</li></ul></div>
+                </div>
+                <div class="dev-card backend">
+                    <div class="dev-header">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SV" alt="Smt. Vasundhara" class="dev-photo-large" loading="lazy">
+                        <div class="dev-header-text"><h2>Smt. Vasundhara</h2><span class="role-badge badge-back">Vice Principal</span></div>
+                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Guiding us with wisdom and heart 💚</li></ul></div>
+                </div>
+                <div class="dev-card backend">
+                    <div class="dev-header">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=SA" alt="Smt. Aishwarya" class="dev-photo-large" loading="lazy">
+                        <div class="dev-header-text"><h2>Smt. Aishwarya</h2><span class="role-badge badge-back">Project Mentor</span></div>
+                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>The branch that supports every leaf 🌿</li></ul></div>
+                </div>
+                <div class="dev-card backend">
+                    <div class="dev-header">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=MN" alt="Mayurarajan NS" class="dev-photo-large" loading="lazy">
+                        <div class="dev-header-text"><h2>Mayurarajan NS</h2><span class="role-badge badge-back">Mental Math Developer</span></div>
+                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Mental Math Tile</li><li>Created Situation</li></ul></div>
+                </div>
+                <div class="dev-card assistant">
+                    <div class="dev-header">
+                        <img src="https://placehold.co/200x200/4facfe/ffffff?text=VN" alt="Visvesh Natarajan Iyer" class="dev-photo-large" loading="lazy">
+                        <div class="dev-header-text"><h2>Visvesh Natarajan Iyer</h2><span class="role-badge badge-assist">Vedic Maths Developer</span></div>
+                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Created Vedic Maths</li><li>Planned the work.</li></ul></div>
+                </div>
+                <div class="dev-card assistant">
+                    <div class="dev-header">
+                        <img src="https://placehold.co/200x200/4facfe/ffffff?text=A" alt="Anand" class="dev-photo-large" loading="lazy">
+                        <div class="dev-header-text"><h2>Anand</h2><span class="role-badge badge-assist">Multi-App Developer</span></div>
+                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Built Word of the Day, Idioms, Zoko AI, Riddles</li><li>Dedicated Work</li></ul></div>
+                </div>
+                <div class="dev-card assistant">
+                    <div class="dev-header">
+                        <img src="https://placehold.co/200x200/f093fb/ffffff?text=GG" alt="Gaurav Gadin" class="dev-photo-large" loading="lazy">
+                        <div class="dev-header-text"><h2>Gaurav Gadin</h2><span class="role-badge badge-assist">Presenter</span></div>
+                    </div>
+                    <div class="dev-body"><h3>Core Contributions</h3><ul class="contribution-list"><li>Presented our work to Vikshit Bharat</li><li>Prepared wonderful speech</li></ul></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== Simple Navigation Logic =====
+        const sections = {
+            dashboard: document.getElementById('mainDashboard'),
+            dataCapture: document.getElementById('dataCaptureSection'),
+            developers: document.getElementById('developersPage')
+        };
+
+        function hideAll() {
+            Object.values(sections).forEach(section => {
+                section.style.display = 'none';
+            });
+        }
+
+        function showMainDashboard() {
+            hideAll();
+            sections.dashboard.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function showDataCapture() {
+            hideAll();
+            sections.dataCapture.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function showDevelopersPage() {
+            hideAll();
+            sections.developers.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
-
 </html>
